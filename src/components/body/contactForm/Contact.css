@@ -1,0 +1,119 @@
+ 
+
+
+
+.block contactBlock{
+    background-color: #ffffff;
+}
+  
+  h2{
+      color: #093A3E;
+      font-size: 26px;
+  }
+  p {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  
+  .bgGray {
+    background: #ffffff;
+  }
+  
+ .container-fluid {
+    margin: 0 auto;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+align-items: center;
+  }
+
+  
+
+ .titleHolderr {
+    text-align: center;
+    position: relative;
+    padding: 0 0 20px;
+    margin: 0 0 40px;
+    
+  }
+  
+  .titleHolderr:after {
+    transform: translateX(-50%);
+    content: '';
+    background-color: #093A3E;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    font-size: 16px;
+    height: 2px;
+    width: 150px;
+  }
+  
+  .titleHolder h2 {
+    font-size: 38px;
+    margin: 0;
+  }
+
+  .inputt{
+   
+      width: 17.5rem;
+      height: 2.5rem;
+      border-radius: 3px;
+      display: flex;
+      justify-content: center;
+      border: 2px solid #008080;
+      text-align: center;
+      align-self: center;
+
+     
+  }
+  .login-form{
+display: flex;
+flex-direction: column;
+justify-content: center;
+  }
+  .inputtt{
+    
+    width: 17.5rem;
+    height: 5rem;
+    border-radius: 3px;
+    border: 2px solid #008080;
+    text-align: center;
+    align-self: center;
+}
+.site-card-border-less-wrapper {
+    padding: 30px;
+    background: #774848;
+  }
+  .grid{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      background: rgb(255, 255, 255);
+      max-width: 25rem;
+      min-height: 35rem;
+      border-radius: 10px;
+      margin: auto;
+      border:  1px solid #093A3E; 
+  }
+
+
+@media only screen and (max-width: 991px) {
+    .pricingBlock .ant-row > div:nth-child(2) .ant-list-item {
+      transform: scale(1.14);
+    }
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .pricingBlock .ant-row > div:nth-child(2) .ant-list-item {
+      transform: scale(1);
+    }
+  
+    .mobileVisible {
+      display: block;
+    }
+    
+    .mobileHidden {
+      display: none;
+    }
+  }

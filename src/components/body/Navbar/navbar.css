@@ -1,0 +1,54 @@
+
+
+
+
+.navbaritem{
+font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", 
+  Helvetica, Arial,  sans-serif;    font-weight:400;
+    line-height: 17px;
+    font-size: 14px;
+    color: #fff;
+}
+.navbaritem:hover{
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", 
+  Helvetica, Arial,  sans-serif;   
+   font-weight:700;
+    line-height: 17px;
+    font-size: 14px;
+    color: #fff;
+
+}
+.Button {
+     background-color: #008080;
+    border-radius: 10;
+    max-width: 8.5rem;
+    min-height: 2.5rem;
+    font-size: 16px;
+}
+.Button:hover{
+    background-image: #fff;
+    color: rgb(0, 0, 0);
+}
+.menuitem{
+  border-radius: 12px;
+}
+.navbaritemmenu{
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", 
+  Helvetica, Arial,  sans-serif;   
+   font-weight:700;
+    line-height: 17px;
+    font-size: 14px;
+    color: #000;
+}
+.navbaritemmenu:hover{
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", 
+  Helvetica, Arial,  sans-serif;   
+   font-weight:700;
+    line-height: 17px;
+    font-size: 14px;
+    color: #000;
+}
+.iconmenu:hover{
+width: 1rem;
+}
+
