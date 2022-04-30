@@ -9,7 +9,8 @@ import Divider from "@mui/material/Divider";
 import Navbar from '../Navbar/Navbar'
 import Form from '../contactForm/Form'
 import idea from '../../../assets/idea.svg'
-import Information from '../Infocard/Infocard'
+import Information from '../Infocard/Details'
+import {motion} from 'framer-motion'
 function Home() {
   return (
     <>
@@ -62,9 +63,13 @@ function Home() {
       mt: -8,
       
     }}>
+
     <Box  component="section" py={3}>
     <Container>    
         <Grid container item xs={12} lg={9} sx={{ mx: "auto" }}>
+     
+        
+       
           <Grid item xs={12} md={4}>
           <Box p={2} textAlign="center" lineHeight={1}>
           <Typography style={{ color: "#008080" }} variant="h1">
@@ -92,7 +97,7 @@ function Home() {
           <Typography style={{fontFamily:"Roboto", fontWeight:'300',lineHeight:'26px', color:'#7b809a', fontSize:'16px'}} variant="body2" color="text">
           Once the lost item "matched", prove who you are thanks to a security question (ex: describe the shell of your phone, ...). Then, our partner who found this item will be able to validate that this is yours          </Typography> 
           </Box> <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, mx: 0 }} />
-          </Grid>
+          </Grid> 
           <Grid item xs={12} md={4} display="flex">
          
 
@@ -119,10 +124,7 @@ function Home() {
             boxShadow: 2,
             minHeight: 150,
             width: 800,
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'dark' ? '#1A2027' : '#ffffff',
-          }}
-        >
+                  }}  >
         <Box sx={{p:0}} display='flex'  >
         <img src={idea} style={{maxWidth:'8rem',minHeight:'1rem'}} alt='Nb'/>
         <div style={{display:'flex',alignSelf:'center',flexDirection:'column',margin:'2px'}}>
@@ -131,9 +133,12 @@ function Home() {
         </Paper>
           </Grid>
     </Box>
+   <br/> 
+    
+<br/>
     <Information/>
-  <Form />
-    </Card>
+ <Form />
+    </Card> 
     </>
   );
 }

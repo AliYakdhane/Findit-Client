@@ -11,17 +11,14 @@ const Account = () => (
       component="main"
       sx={{
         flexGrow: 1,
-        py: 2
-      }}
+        py: 2      }}
     >
       <Container maxWidth="lg">
-      <div>
-      <h4 className="text-gray-600">Account</h4>
-    </div>
+    
     <br/>
         <Grid
           container
-          spacing={3}
+          spacing={2}
         >
           <Grid
             item

@@ -151,7 +151,7 @@ export default function MiniDrawer() {
       <CssBaseline />
       <AppBar className='appbar'
 sx={{flexGrow:0 ,left:0}}
-      style={{backgroundColor:'#5D8C8E',display:'flex',flexDirection:'row', minHeight:'4rem'}}
+      style={{backgroundColor:'#5D8C8E',display:'flex',flexDirection:'row', minHeight:'5rem'}}
       position="fixed" open={open} >
         <Toolbar>
           <IconButton

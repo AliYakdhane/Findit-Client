@@ -22,7 +22,7 @@ import {
   };
   
   export const AccountProfile = (props) => (
-    <Card style={{height:'53ch',borderRadius:'15px'}} {...props}>
+    <Card style={{minHeight:'53ch',borderRadius:'15px'}} {...props}>
       <CardContent>
         <Box
           sx={{
