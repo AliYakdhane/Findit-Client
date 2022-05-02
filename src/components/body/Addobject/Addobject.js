@@ -16,16 +16,14 @@ import { useTheme } from "@mui/material/styles";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Category from './Category'
-import { emphasize, styled } from '@mui/material/styles';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Chip from '@mui/material/Chip';
-import HomeIcon from '@mui/icons-material/Home';
-import HomeOutlinedIcon from '@mui/icons-material/Home';
+import addfile from "../../../assets/addfile.svg";
+
 import { Nav, InputPicker,Input } from 'rsuite';
 import './addobject.css'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Checkbox, CheckboxGroup } from 'rsuite';
+
 import { Card } from "@mui/material";
+import { Form,Schema,  InputGroup, Tooltip } from 'rsuite';
+import { DatePicker } from 'rsuite';
 
 
 const data =[
@@ -38,27 +36,6 @@ const data =[
     "value":'Found',
   }
 ]
-const styles = { width: 300, display: 'block' };
-const StyledBreadcrumb = styled(Chip)(({ theme }) => {
-  const backgroundColor =
-    theme.palette.mode === 'light'
-      ? theme.palette.grey[100]
-      : theme.palette.grey[800];
-  return {
-    backgroundColor,
-    height: theme.spacing(3),
-    color: theme.palette.text.primary,
-    fontWeight: theme.typography.fontWeightRegular,
-    '&:hover, &:focus': {
-      backgroundColor: emphasize(backgroundColor, 0.06),
-    },
-    '&:active': {
-      boxShadow: theme.shadows[1],
-      backgroundColor: emphasize(backgroundColor, 0.12),
-    },
-  };
-}); // TypeScript only: need a type cast here because https://github.com/Microsoft/TypeScript/issues/26591
-
 function handleClick(event) {
   event.preventDefault();
   console.info('You clicked a breadcrumb.');
@@ -95,9 +72,19 @@ function a11yProps(index) {
 }
 
 
-
 export default function Addobject() {
-
+  const TextField = React.forwardRef((props, ref) => {
+    const { name, label, accepter, ...rest } = props;
+    return (
+      <Form>
+      <Form.Group controlId={`${name}-4`} ref={ref}>
+        <Form.ControlLabel>{label} </Form.ControlLabel>
+        <Form.Control name={name} accepter={accepter} {...rest} />
+      </Form.Group></Form>
+    );
+  });
+  
+  const [open, setOpen] = React.useState(false);
 
  
   const handleChange = (newValue) => {
@@ -118,39 +105,24 @@ export default function Addobject() {
 
   
   return (
-    <div> 
-    <div role="presentation" onClick={handleClick}>
-    <Breadcrumbs aria-label="breadcrumb">
-      <StyledBreadcrumb
-        component="a"
-        href="#"
-        label="Home"
-        icon={<HomeOutlinedIcon fontSize="small" />}
-      />
-     
-      <StyledBreadcrumb
-        label="Add Item"
-        deleteIcon={<ExpandMoreIcon />}
-        onDelete={handleClick}
-      />
-    </Breadcrumbs>
-  </div>
-  <br/>
+   
       <div className=" flex justify-center  ">
         <CssBaseline />
        
-        <Container fixed sx={{Width:300}}>      
+        <Container open={open} fixed sx={{Width:300}}>      
            
         <Card
         sx={{
           boxShadow: 10,
           borderRadius:6,
           p: 2,
-          mx: { xs: 1, lg: 4 },
+          mx: { xs: 4, lg: 4 },
           
           
         }}>
           <br/>
+          <Typography style={{fontFamily:'Roboto',fontWeight:'700',fontSize:'17px',lineHeight:'26px',color:'#344767'}}>
+          Fill out the form to report your item          </Typography>
             <div
               style={{
                 display: "flex",
@@ -158,72 +130,57 @@ export default function Addobject() {
                 margin:'5px'
               }}
             >
-            <Button style={{color:'#a7a7a7',border:'1px solid #ddd'}} variant="outlined" startIcon={<PlayCircleOutlineIcon style={{color:'green'}} />}>
+            <Button style={{color:'#a7a7a7',borderRadius:'12px',border:'1px solid #ddd'}} variant="outlined" startIcon={<PlayCircleOutlineIcon style={{color:'green'}} />}>
             Video-How does it work
           </Button>
             </div>
-            
+            <br/>
+            <div className="wrapper">
+<div style={{maxWidth:'60rem'}}>
             <div style={{ marginLeft: "12px" }}>
 
-              <h4 style={{fontFamily: 'extraBold'}}>Status</h4>
-            </div><br/><div style={{ marginLeft: "12px", display:'flex',flexDirection:'row' }}>
-            <InputPicker size="lg" placeholder="Select your status" data={data}   />
+              <h4 style={{ fontSize: "21px",color:'#495057', fontFamily: "Roboto",fontWeight:'400',lineHeight:'21px',textTransform:'none' }}>Status</h4>
+            </div><br/>
+            <div style={{ marginLeft: "12px", display:'flex',flexDirection:'row' }}>
+            <InputPicker style={{width:'61rem'}} placeholder="Select your status" data={data}   />
             </div>
 
           
             <br />
             <div style={{ marginLeft: "12px" }}>
-              <h4 style={{fontFamily: 'extraBold'}}>Where</h4>
+              <h4   style={{ fontSize: "21px",color:'#495057', fontFamily: "Roboto",fontWeight:'400',lineHeight:'21px',textTransform:'none' }}>Where?</h4>
             </div>
+            
             <Box
               sx={{
                 bgcolor: "#fff",
                 position: "relative",
                 minHeight: 150,
               }}
+              
             >
-          
-          {/*  <Nav appearance="subtle"
-            onChange={handleChangee}
-            >
-            <Nav.Item {...a11yProps(0)}  label="Adress">Adress</Nav.Item>
-            
-            <Nav.Item   {...a11yProps(1)}>Transport</Nav.Item>
-            <Nav.Item>Airport</Nav.Item>
-            <Nav.Item>Supermarket</Nav.Item>
-            <Nav.Item>About</Nav.Item>
-          </Nav>*/}
-            
                 <Tabs
                   onChange={handleChangee}
-                 
                   value={value}
                   aria-label="action tabs example"
-                  backgroundColr="#fff"
-                  TabIndicatorProps={{
-                    style: {
-                      backgroundColor: "#008080"
-                     }
-                    }}
+                  backgroundColor="#fff"
+                  borderBottom='1px solid #fff'
                 >
                   <Tab
-                    style={{ fontSize: "16px", fontFamily: "bold",borderBottom:'1px solid #000' }}
+                    style={{ fontSize: "16px", fontFamily: "Roboto",fontWeight:'500',lineHeight:'21px',textTransform:'none' }}
                     label="Adress"
                     {...a11yProps(0)}
                   />
                   <Tab
-                    style={{ fontSize: "14px", fontFamily: "bold",borderBottom:'1px solid #000' }}
-                    label="Transport"
+                  style={{ fontSize: "16px", fontFamily: "Roboto",fontWeight:'500',lineHeight:'21px',textTransform:'none' }}                    label="Transport"
                     {...a11yProps(1)}
                   />
                   <Tab
-                    style={{ fontSize: "16px", fontFamily: "bold",borderBottom:'1px solid #000' }}
-                    label="Airport"
+                  style={{ fontSize: "16px", fontFamily: "Roboto",fontWeight:'500',lineHeight:'21px',textTransform:'none' }}                    label="Airport"
                     {...a11yProps(2)}
                   />
                   <Tab
-                    style={{ fontSize: "16px", fontFamily: "bold",borderBottom:'1px solid #000' }}
-                    label="Supermarket"
+                  style={{ fontSize: "16px", fontFamily: "Roboto",fontWeight:'500',lineHeight:'21px',textTransform:'none' }}                    label="Supermarket"
                     {...a11yProps(3)}
                   />
             </Tabs>
@@ -235,66 +192,46 @@ export default function Addobject() {
                 onChangeIndex={handleChangeIndex}
               >
                 <div
-                  style={{ color: "#008080" }}
+                 
                   value={value}
                   index={0}
                   dir={theme.direction}
                 >
                   <Box
                     component="form"
-                    sx={{
-                      "& > :not(style)": { m: 1, width: "125ch" },
-                    }}
                     noValidate
                     autoComplete="off"
                   >
-                  <Input size='lg'  placeholder="Enter the location of the lost/find" />
-                      
-                    
+                  <TextField style={{width:'61ch'}}  placeholder="Enter the location of the lost/find" />
                   </Box>
                 </div>
-                <div value={value} index={1} dir={theme.direction}>
+                <div value={value} index={1} >
                   <Box
                     component="form"
-                    sx={{
-                      "& > :not(style)": { m: 1, width: "125ch" },
-                    }}
                     noValidate
                     autoComplete="off"
                   >
-                  <Input size='lg' placeholder="Select a transport network" />
+                  <TextField style={{width:'61ch'}}  placeholder="Enter the location of the lost/find" />
                   </Box>
                 </div>
                 <TabPanel value={value} index={2} dir={theme.direction}>
                   <Box
                     component="form"
-                    sx={{
-                      "& > :not(style)": { m: 1, width: "125ch" },
-                    }}
                     noValidate
                     autoComplete="off"
                   >
-                    <TextField
-                      id="outlined-basic"
-                      label="Search"
-                      variant="outlined"
-                    />
+                  <TextField style={{width:'61ch'}}  placeholder="Enter the location of the lost/find" />
+
                   </Box>
                 </TabPanel>
                 <TabPanel value={value} index={3} dir={theme.direction}>
                   <Box
                     component="form"
-                    sx={{
-                      "& > :not(style)": { m: 1, width: "125ch" },
-                    }}
                     noValidate
                     autoComplete="off"
                   >
-                    <TextField
-                      id="outlined-basic"
-                      label="Enter the name of Supermarket"
-                      variant="outlined"
-                    />
+                  <TextField style={{width:'61ch'}}  placeholder="Enter the location of the lost/find" />
+
                   </Box>
                 </TabPanel>
               </SwipeableViews>
@@ -302,37 +239,37 @@ export default function Addobject() {
 
             <div>
               <div style={{ marginLeft: "12px" }}>
-                <h6 style={{fontFamily: 'cursive'}}>When</h6>
+                <h4 style={{ fontSize: "21px",color:'#495057', fontFamily: "Roboto",fontWeight:'400',lineHeight:'21px',textTransform:'none' }}>When?</h4>
               </div>
-              <div>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <Stack>
-                    <Box
-                      component="form"
-                      sx={{
-                        "& > :not(style)": { m: 4, width: "125ch" },
-                      }}
-                      noValidate
-                      autoComplete="off"
-                    >
-                      <DateTimePicker
-                        label="Date&Time picker"
-                        value={value}
-                        onChange={handleChange}
-                        renderInput={(params) => <TextField {...params} />}
-                      />
-                    </Box>
-                    <p></p>
-                  </Stack>
-                </LocalizationProvider>
-              </div>
-            </div>
-           
+              <br/>
+              <DatePicker
+              style={{width:'53.5ch'}}
+              format="yyyy-MM-dd HH:mm:ss"
+              locale={{
+                sunday: 'Su',
+                monday: 'Mo',
+                tuesday: 'Tu',
+                wednesday: 'We',
+                thursday: 'Th',
+                friday: 'Fr',
+                saturday: 'Sa',
+                ok: 'OK',
+                today: 'Today',
+                yesterday: 'Yesterday',
+               
+              }}
+            />
+            </div></div>
+            <div
+            className="  w-full bg-contain flex flex-center bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${addfile})` }}
+          ></div>
+           </div>
            <Category />
             <p></p>
           </Card>
         </Container>
       </div>
-    </div>
+  
   );
 }

@@ -16,6 +16,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
+    "@iconscout/react-unicons": "^1.1.6",
     "@material-tailwind/react": "^0.3.4",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
@@ -34,6 +35,7 @@
     "axios": "^0.20.0",
     "bootstrap": "^4.6.0",
     "cdbreact": "^1.5.1",
+    "context": "^2.0.6",
     "emailjs": "^3.8.0",
     "emailjs-com": "^3.2.0",
     "eslint": "^6.8.0",
@@ -63,6 +65,7 @@
     "redux": "^4.0.5",
     "rsuite": "^5.9.0",
     "styled-components": "^5.3.5",
+    "typeface-roboto": "^1.1.13",
     "webfontloader": "^1.6.28"
   },
   "scripts": {

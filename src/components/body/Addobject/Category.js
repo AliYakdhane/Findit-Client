@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -10,92 +9,45 @@ import Typography from "@mui/material/Typography";
 import devices5 from "../../../assets/devices5.gif";
 import devices4 from "../../../assets/devices4.gif";
 import devices3 from "../../../assets/devices3.gif";
-import devices1 from "../../../assets/devices1.gif";
 import devices2 from "../../../assets/devices2.gif";
 import devices0 from "../../../assets/devices0.gif";
 import Radio from "@mui/material/Radio";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import Checkbox from "@mui/material/Checkbox";
-import { FormGroup, Label, Input } from "reactstrap";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { CFormInput,CInputGroup,CInputGroupText } from '@coreui/react'
-import ListItemAvatar from "@mui/material/ListItemAvatar";
 
-import ListItemText from "@mui/material/ListItemText";
-import ListItem from "@mui/material/ListItem";
 import CircleIcon from "@mui/icons-material/Circle";
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import PhoneIcon from '@mui/icons-material/Phone';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import PersonPinIcon from '@mui/icons-material/PersonPin';
-import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import EditIcon from '@mui/icons-material/Edit';
-import Divider from '@mui/material/Divider';
-import ArchiveIcon from '@mui/icons-material/Archive';
-import FileCopyIcon from '@mui/icons-material/FileCopy';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Form} from 'rsuite';
+import Cards from './Cards'
 import { CFormTextarea,CFormSelect } from '@coreui/react'
+import { FormGroup } from "react-bootstrap";
 
 
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const StyledMenu = styled((props) => (
-    <Menu
-      elevation={0}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'right',
-      }}
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      {...props}
-    />
-  ))(({ theme }) => ({
-    '& .MuiPaper-root': {
-      borderRadius: 6,
-      marginTop: theme.spacing(1),
-      minWidth: 180,
-      color:
-        theme.palette.mode === 'light' ? 'rgb(55, 65, 81)' : theme.palette.grey[300],
-      boxShadow:
-        'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
-      '& .MuiMenu-list': {
-        padding: '4px 0',
-      },
-      '& .MuiMenuItem-root': {
-        '& .MuiSvgIcon-root': {
-          fontSize: 18,
-          color: theme.palette.text.secondary,
-          marginRight: theme.spacing(1.5),
-        },
-        '&:active': {
-          backgroundColor: alpha(
-            theme.palette.primary.main,
-            theme.palette.action.selectedOpacity,
-          ),
-        },
-      },
-    },
-  }));
+
 export default function Category() {
+
+  const TextField = React.forwardRef((props, ref) => {
+    const { name, label, accepter, ...rest } = props;
+    return (
+      <Form>
+      <Form.Group controlId={`${name}-4`} ref={ref}>
+        <Form.ControlLabel>{label} </Form.ControlLabel>
+        <Form.Control name={name} accepter={accepter} {...rest} />
+      </Form.Group></Form>
+    );
+  });
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
+ 
+
   const [ouvertState, setOuvertState] = useState(false);
   const [toggleState, setToggleState] = useState(false);
   const [toggleeState, setToggleeState] = useState(false);
@@ -106,9 +58,7 @@ export default function Category() {
   const handleChange = (event, newValue) => {
     setValuee(newValue);
   };
-  const handlerChange = (event, newValue) => {
-    setValue(newValue);
-  };
+
 
   const ouvertFonction = () => {
     setOuvertState(!ouvertState);
@@ -127,7 +77,7 @@ export default function Category() {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div style={{ marginLeft: "12px", marginTop: "25px" }}>
-        <h5 style={{fontFamily: 'cursive'}}>Select a Category</h5>
+        <h4 style={{ fontSize: "21px",color:'#495057', fontFamily: "Roboto",fontWeight:'400',lineHeight:'21px',textTransform:'none' }}>Select a Category</h4>
       </div>
       <br />
       <br />
@@ -141,7 +91,7 @@ export default function Category() {
         >
         <div >
         
-          {toggleState ? (
+         {toggleState ? (
             <Card
               style={{
                 display: "inline-block",
@@ -532,9 +482,9 @@ export default function Category() {
               <div>
                 {" "}
                 <div style={{ marginLeft: "12px", marginTop: "25px" }}>
-                  <h4 style={{fontFamily: 'cursive'}}>Describe your item:</h4>
+                  <h4 style={{ fontSize: "21px",color:'#495057', fontFamily: "Roboto",fontWeight:'400',lineHeight:'21px',textTransform:'none' }}>Describe your item:</h4>
 
-                  <h4 style={{ marginTop: "2px",fontFamily: 'cursive' }}>Brand</h4>
+                  <h4 style={{ fontSize: "21px",color:'#495057', fontFamily: "Roboto",fontWeight:'400',lineHeight:'21px',textTransform:'none' }}>Brand</h4>
                   <br />
                 </div>
                 <Box
@@ -545,11 +495,8 @@ export default function Category() {
                   noValidate
                   autoComplete="off"
                 >
-                  <TextField
-                    id="outlined-basic"
-                    label="Enter the location of the lost/find"
-                    variant="outlined"
-                  />
+                <TextField style={{width:'61ch'}}  placeholder="Enter the location of the lost/find" />
+
                 </Box>
                 <FormControl style={{marginLeft:'5px'}} component="fieldset">
                   <FormControlLabel
@@ -562,7 +509,7 @@ export default function Category() {
                 </FormControl>
                 <FormGroup>
                 <div style={{ marginLeft: "12px", marginTop: "25px" }}>
-                <h4 style={{fontFamily: 'cursive'}}>Item's picture</h4>
+                <h4 style={{ fontSize: "21px",color:'#495057', fontFamily: "Roboto",fontWeight:'400',lineHeight:'21px',textTransform:'none' }}>Item's picture</h4>
               </div>
               <br/>
               <CInputGroup style={{width:'125ch',height:'3.5rem'}} className="flex-nowrap">
@@ -571,7 +518,7 @@ export default function Category() {
 </CInputGroup>
                   
                   <div style={{ marginLeft: "12px", marginTop: "25px" }}>
-                  <h4 style={{fontFamily: 'cursive'}}>Item color</h4>
+                  <h4 style={{ fontSize: "21px",color:'#495057', fontFamily: "Roboto",fontWeight:'400',lineHeight:'21px',textTransform:'none' }}>Item color</h4>
                   <br/>
                 </div>
                     <Box
@@ -630,7 +577,7 @@ export default function Category() {
                   </Box>
                    
                   <div style={{ marginLeft: "12px", marginTop: "25px" }}>
-               <h5 style={{fontFamily: 'cursive'}}>Model</h5>
+               <h4 style={{ fontSize: "21px",color:'#495057', fontFamily: "Roboto",fontWeight:'400',lineHeight:'21px',textTransform:'none' }}>Model</h4>
                <br/>
              </div>
              <Box
@@ -651,14 +598,14 @@ export default function Category() {
 
            
            <div style={{ marginLeft: "12px", marginTop: "25px" }}>
-           <h5 style={{fontFamily: 'cursive'}}>Detail</h5>
+           <h4 style={{ fontSize: "21px",color:'#495057', fontFamily: "Roboto",fontWeight:'400',lineHeight:'21px',textTransform:'none' }}>Detail</h4>
            <br/>
          </div>
          <CFormTextarea style={{width:'125ch'}} id="exampleFormControlTextarea1" rows="3"></CFormTextarea>
 
        
        <div style={{ marginLeft: "12px", marginTop: "25px" }}>
-       <h5 style={{fontFamily: 'cursive'}}>State</h5>
+       <h4 style={{ fontSize: "21px",color:'#495057', fontFamily: "Roboto",fontWeight:'400',lineHeight:'21px',textTransform:'none' }}>State</h4>
        <br/>
      </div>
        <CFormSelect 
@@ -743,7 +690,7 @@ export default function Category() {
             {toggleeState && <p>hii</p>}
           </div>
           <br />
-
+<Cards/>
           <div style={{ display: "flex", justifyContent: "center" }}>
           <Button sx={{backgroundColor:'#008080',width:'25%'}} variant="contained">Add Item</Button>
 

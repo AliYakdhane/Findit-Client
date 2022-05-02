@@ -1,0 +1,15 @@
+
+.profileName {
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    padding-top: 0.2rem;
+    padding-left: 0.6rem;
+  }
+  .menuChevron {
+    cursor: pointer;
+    font-size: 12px;
+    margin: 0px 10px;
+    padding-top: 0.5rem;
+
+  }  

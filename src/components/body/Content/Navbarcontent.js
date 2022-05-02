@@ -15,26 +15,16 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined';
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import ElectricBoltOutlinedIcon from '@mui/icons-material/ElectricBoltOutlined';
 import ListItemButton from '@mui/material/ListItemButton';
-import Tooltip from '@mui/material/Tooltip';
 import axios from 'axios'
-import MenuItem from '@mui/material/MenuItem';
-import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import logo from '../../../assets/logo.svg'
-import powerof from '../../../assets/powerof.png'
-import NextLink from 'next/link';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Button } from '@mui/material';
-import franceflag from '../../../assets/franceflag.png'
 import { Link} from "react-router-dom";
-import './NavbarContent.css'
 import proo from '../../../assets/proo.png'
-import proIcon from '../../../assets/proIcon.png'
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 
 
 
@@ -119,23 +109,7 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
   const handleLogout = async () => {
     try {
         await axios.get('localhost://5000/user/logout')
@@ -151,21 +125,21 @@ export default function MiniDrawer() {
       <CssBaseline />
       <AppBar className='appbar'
 sx={{flexGrow:0 ,left:0}}
-      style={{backgroundColor:'#5D8C8E',display:'flex',flexDirection:'row', minHeight:'5rem'}}
+      style={{backgroundColor:'#5D8C8E',display:'flex',flexDirection:'row', minHeight:'4.5rem'}}
       position="fixed" open={open} >
-        <Toolbar>
+        <Toolbar sx={{display:'flex',justifyContent:'flex-start'}}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             
             sx={{
-              
+              justifyContent:'flex-start',
               marginRight: 3,
               ...(open && { display: 'none' }),
             }}
           >
-            <DashboardCustomizeOutlinedIcon />
+            <DoubleArrowIcon />
           </IconButton>
      
            <Typography

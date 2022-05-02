@@ -50,7 +50,7 @@ export const AccountProfileDetails = (props) => {
       noValidate
       {...props}
     >
-      <Card style={{height:'53ch', borderRadius:'12px'}}>
+      <Card style={{minHeight:'53ch', borderRadius:'12px'}}>
         <CardHeader
           subheader="The information can be edited"
           title="Profile"
