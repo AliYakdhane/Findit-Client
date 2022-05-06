@@ -18,6 +18,7 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { Divider } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
+import { CFormInput } from "@coreui/react";
 
 const errorStyles = (errorVisible) => {
   return {
@@ -57,7 +58,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/user/login", {
+      const res = await axios.post(`http://localhost:5000/user/login`, {
         email,
         password,
       });
@@ -102,7 +103,7 @@ function Login() {
       localStorage.setItem("firstLogin", true);
 
       dispatch(dispatchLogin());
-      history.push("/");
+      history.push("/Addobject");
     } catch (err) {
       err.response.data.msg &&
         setUser({ ...user, err: err.response.data.msg, success: "" });
@@ -120,39 +121,29 @@ function Login() {
             <h3>SIGN IN</h3>
             <div className="w-full flex-1 mt-3">
               <div className="flex flex-col items-center">
-                <Form onSubmit={handleSubmit}>
-                  <Form.Group controlId="email">
-                    <Form.ControlLabel>Email</Form.ControlLabel>
-                    <Form.Control
-                      speaker={<Tooltip>Required</Tooltip>}
-                      placeholder="Enter your email adress "
-                      name="email"
-                      type="email"
-                      required
-                    />
-                  </Form.Group>
-                  <Form.ControlLabel>Password</Form.ControlLabel>
-                  <InputGroup inside style={styles}>
-                    <Input
-                      placeholder="Enter your password "
-                      type={visible ? "text" : "password"}
-                    />
-                    <InputGroup.Button onClick={handleChange}>
-                      {visible ? (
-                        <VisibilityOffOutlinedIcon />
-                      ) : (
-                        <VisibilityOutlinedIcon />
-                      )}
-                    </InputGroup.Button>
-                  </InputGroup>
-                  <Link
+              <form
+              onSubmit={handleSubmit}
+              >
+                  
+                    
+                    <CFormInput ttype="text" placeholder="Enter email address" id="email"
+                    value={email} name="email" onChange={handleChangeInput} /> <br/>          
+                    <CFormInput type="password" placeholder="Enter password" id="password"
+                    value={password} name="password" onChange={handleChangeInput} />  
+                     
+
+                  <Link to ='/forgot_password'
                     style={{
-                      color: "blue",
                       display: "flex",
+                      fontFamily: "Roboto",
+                      fontWeight: "600",
+                      fontSize: "14px",
+                      lineHeight: "21px",
+                      color: "#1a73e8",
                       justifyContent: "flex-end",
                       marginTop: "4px",
                     }}
-                    href="#"
+                  
                   >
                     Forgot your password!
                   </Link>
@@ -160,6 +151,7 @@ function Login() {
                   <br />
 
                   <Button
+                  type='submit'
                     sx={{
                       display: "flex",
                       justifyContent: "center",
@@ -181,6 +173,9 @@ function Login() {
                         fontSize: "14px",
                         lineHeight: "21px",
                         color: "#7b809a",
+                        display:'flex',
+                        justifyContent:'center',
+                        
                       }}
                     >
                       Don&apos;t have an account?{" "}
@@ -191,13 +186,14 @@ function Login() {
                           fontSize: "14px",
                           lineHeight: "21px",
                           color: "#1a73e8",
+                          marginLeft:'3px'
                         }}
                       >
                         Sign up
                       </Typography>
                     </Typography>
                   </Link>
-                </Form>
+                </form>
 
                 <div></div>
                 <br />

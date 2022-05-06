@@ -10,7 +10,6 @@ import Navbar from '../Navbar/Navbar'
 import Form from '../contactForm/Form'
 import idea from '../../../assets/idea.svg'
 import Information from '../Infocard/Details'
-import {motion} from 'framer-motion'
 function Home() {
   return (
     <>

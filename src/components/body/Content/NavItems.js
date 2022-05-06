@@ -7,37 +7,50 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import { Link } from 'react-router-dom';
 import ListItemButton from '@mui/material/ListItemButton';
 import axios from 'axios'
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import { deepOrange, deepPurple } from '@mui/material/colors';
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import { FaBell, FaChevronDown } from "react-icons/fa";
+import {  FaChevronDown } from "react-icons/fa";
 import  './Navitems.css'
-import './Navitems.css'
 import icons8 from '../../../assets/icons88.png'
 import icons32 from '../../../assets/icons32.png'
 import icons12 from '../../../assets/icons12.png'
-
-import { Avatar, Badge, Button, Icon, Menu, MenuItem } from '@mui/material';
+import CardHeader from '@material-ui/core/CardHeader';
+import { useContainedCardHeaderStyles } from '@mui-treasury/styles/cardHeader/contained';
+import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
+import { makeStyles } from '@material-ui/core/styles';
+import { Avatar, Icon, Menu, MenuItem } from '@mui/material';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
+
 import './gopro'
 
+
+const useStyles = makeStyles(({ spacing }) => ({
+  card: {
+    marginTop: 40,
+    borderRadius: spacing(0.5),
+    transition: '0.3s',
+    width: '90%',
+    overflow: 'initial',
+    background: '#ffffff',
+  },
+  content: {
+    paddingTop: 0,
+    textAlign: 'left',
+    overflowX: 'auto',
+    '& table': {
+      marginBottom: 0,
+    }
+  },
+}));
+
 const drawerWidth = 220;
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -111,6 +124,8 @@ export default function PersistentDrawerLeft() {
         window.location.href = "/login";
     }
 }
+const cardHeaderStyles = useContainedCardHeaderStyles();
+const cardHeaderShadowStyles = useFadedShadowStyles();
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -134,17 +149,17 @@ export default function PersistentDrawerLeft() {
                 </IconButton>
            <Link to ='/lastitem'>
                  <Typography
-                 className="profileName"
-                  variant="h6"
-                  color="white"
-                  fontFamily="bold"
-                  fontSize="24"
-                  noWrap
-                  component="div"
+               
                   sx={{
                     display: {
                       xs: 'inline-flex',
-                      textDecoration:'none'
+                      textDecoration:'none',
+                      fontFamily:'BigJohonPro',
+                      fontWeight:'700',
+                      fontSize:'27px',
+                      lineHeight:'78px',
+                      color:'#fff'
+                      
                     }
                   }}>
                   FIND IT
@@ -153,7 +168,7 @@ export default function PersistentDrawerLeft() {
               <Box sx={{ flexGrow: 0,marginRight:'3rem',display:'flex', flexDirection:'row' }}>
             
               
-              <NotificationsNoneOutlinedIcon style={{width:'30px',height:'30px',maringBottom:'0.6rem'}}/>
+              <NotificationsOutlinedIcon style={{width:'30px',height:'30px',maringBottom:'0.6rem'}}/>
            
               <Avatar sx={{ bgcolor: 'primary' }} style={{width:'30px',height:'30px'}} label='A' />
               <p className="profileName">Ali Yakdhane</p>
@@ -179,7 +194,7 @@ export default function PersistentDrawerLeft() {
                   <MenuItem onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">Account</Typography>
                   </MenuItem></Link>
-                  <Link to ='/login'>
+                  <Link to ='/login'  onClick={handleLogout}>
                   <MenuItem onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">Log out</Typography>
                   </MenuItem></Link>
@@ -194,7 +209,8 @@ export default function PersistentDrawerLeft() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
-             backgroundColor:'#E8F1F2'
+             backgroundColor:'#E8F1F2',
+             border:'1px solid #cacaca'
           },
         }}
        
@@ -207,6 +223,10 @@ export default function PersistentDrawerLeft() {
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader><br/>
+        <Typography style={{fontFamily:'Roboto',fontWeight:'700',fontSize:'19px',lineHeight:'26px',color:'#344767',paddingLeft:'1rem'}}>
+Menu          </Typography>
+<br/>
+
         <List sx={{marginRight:'2px'}}>
          
            
@@ -229,8 +249,8 @@ export default function PersistentDrawerLeft() {
             }}
             >
             <Box
-            width="2rem"
-            height="2rem"
+            width="1.9rem"
+            height="1.9rem"
             backgroundColor='white'
             color="gray"
             coloredShadow="info"
@@ -266,8 +286,8 @@ export default function PersistentDrawerLeft() {
         justifyContent: 'center',
       }}
     >  <Box
-    width="2rem"
-    height="2rem"
+    width="1.9rem"
+    height="1.9rem"
     backgroundColor='white'
     color='gray'
     coloredShadow="info"
@@ -303,8 +323,8 @@ export default function PersistentDrawerLeft() {
       }}
     >
     <Box
-    width="2rem"
-    height="2rem"
+    width="1.9rem"
+    height="1.9rem"
     backgroundColor='white'
     color="gray"
     coloredShadow="info"
@@ -340,8 +360,8 @@ export default function PersistentDrawerLeft() {
       }}
     >
     <Box
-    width="2rem"
-    height="2rem"
+    width="1.9rem"
+    height="1.9rem"
     backgroundColor='white'
     color="gray"
     coloredShadow="info"
@@ -363,8 +383,17 @@ export default function PersistentDrawerLeft() {
             
           
         </List>
-     <gopro/>
-      </Drawer>
+       <Link to ='/dashboard/home'> 
+      <CardHeader
+      style={{marginTop:'12rem',cursor:'pointer',backgroundColor:'#008080'}}
+      className={cardHeaderShadowStyles.root}
+      classes={cardHeaderStyles}
+      title={'Pro Solution'}
+      subheader={'Upgrade to pro now!'}
+    />
+        </Link>
+    
+   </Drawer>
       <Main open={open}>
         <DrawerHeader />
      

@@ -27,11 +27,31 @@ import { Form} from 'rsuite';
 import Cards from './Cards'
 import { CFormTextarea,CFormSelect } from '@coreui/react'
 import { FormGroup } from "react-bootstrap";
+import IconButton from '@mui/material/IconButton';
+import { styled } from '@mui/material/styles';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 
 export default function Category() {
+
+
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
 
   const TextField = React.forwardRef((props, ref) => {
     const { name, label, accepter, ...rest } = props;
@@ -79,8 +99,7 @@ export default function Category() {
       <div style={{ marginLeft: "12px", marginTop: "25px" }}>
         <h4 style={{ fontSize: "21px",color:'#495057', fontFamily: "Roboto",fontWeight:'400',lineHeight:'21px',textTransform:'none' }}>Select a Category</h4>
       </div>
-      <br />
-      <br />
+  
       <div value={valuee} onChange={handleChange} style={{ display: "flex", flexDirection: "column" }}>
         <box
           style={{
@@ -89,7 +108,7 @@ export default function Category() {
             flexDirection: "column",
           }}
         >
-        <div >
+     {/*    <div >
         
          {toggleState ? (
             <Card
@@ -688,11 +707,22 @@ export default function Category() {
               </div>
             )}
             {toggleeState && <p>hii</p>}
-          </div>
+                    </div>*/}
           <br />
 <Cards/>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-          <Button sx={{backgroundColor:'#008080',width:'25%'}} variant="contained">Add Item</Button>
+<br/>
+          <div style={{      
+           
+          display: "flex", justifyContent: "center" }}>
+          <Button sx={{
+          backgroundColor: "#5D8C8E",
+          width:'14.5rem',
+          height:'2rem',
+          fontSize: "16px",
+          lineHeight:'19px',
+          fontFamily:'Roboto',
+          fontWeight:'600',
+          margin:'auto',}} variant="contained"> <AddCircleOutlineIcon style={{marginRight:'4px'}}/>Add Item</Button>
 
           </div>
           <br/>
