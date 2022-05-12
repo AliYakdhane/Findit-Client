@@ -23,7 +23,7 @@ class Chatbot extends Component {
 
     return (
       <ChatBot  
-      style={{Color:'#163A5F'}}
+      style={{Color:'#008080'}}
         steps={steps}
         floating={true}
         opened={opened}

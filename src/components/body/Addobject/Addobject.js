@@ -4,11 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DateTimePicker from "@mui/lab/DateTimePicker";
+import ScrollButton from '../home/ScrollButton'
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
@@ -17,7 +13,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Category from './Category'
 import addfile from "../../../assets/addfile.svg";
-
+import Chatbot from '../home/Chatbot'
 import { Nav, InputPicker,Input } from 'rsuite';
 import './addobject.css'
 
@@ -269,6 +265,8 @@ export default function Addobject() {
             <p></p>
           </Card>
         </Container>
+        <Chatbot/>
+        <ScrollButton/>
       </div>
   
   );

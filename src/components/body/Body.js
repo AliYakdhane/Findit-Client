@@ -23,7 +23,7 @@ import account from '../body/profile/account'
 import dashboard from '../body/Offre Pro/dashboard'
 import Homepro from '../body/Offre Pro/Homepro/Homepro'
 import Cards from '../body/Addobject/Cards'
-import usertable from '../body/Admin/tables/usertable'
+import chatbot from './home/Chatbot'
 function Body() {
     const auth = useSelector(state => state.auth)
     const {isLogged, isAdmin} = auth
@@ -31,7 +31,6 @@ function Body() {
         
         <Router>
             <Switch>
-            <Route path="/test" component={usertable} exact /> 
 
             <Route path="/Homepro" component={Homepro} exact /> 
             <Route path="/Conversation" component={Chatting} exact /> 
@@ -39,31 +38,27 @@ function Body() {
                 <Route path="/" component={Home} exact /> 
                      <Route path="/login" component={isLogged ? NotFound : Login} exact />
                 <Route path="/register" component={isLogged ? NotFound : Register} exact />
-
                 <Route path="/forgot_password" component={isLogged ? NotFound : ForgotPass} exact />
                 <Route path="/user/reset/:token" component={isLogged ? NotFound : ResetPass} exact />
                 <Route path="/user/activate/:activation_token" component={ActivationEmail} exact />
                <Router>
                    <Navbarcontent/>
                 <Switch>
-               
-                               
                 <div  style={{display:'flex',justifyContent:'center'}}>
-
                 <Route path="/Addobject" component={isLogged ? Addobject : NotFound} exact />
                 <Route path="/LastItem" component={isLogged ? Homecontent : NotFound} exact />
                 <Route path="/Myitems" component={isLogged ? Myitems : NotFound} exact />
                 <Route path="/account" component={isLogged ? account : NotFound} exact />
                 <Route path="/dashboard/home" component={isLogged ? dashboard : NotFound} exact />
-
                 <Route path="/profile" component={isLogged ? Profile : NotFound} exact />
                 <Route path="/edit_user/:id" component={isAdmin ? EditUser : NotFound} exact />
                 </div>
-           </Switch> 
+           </Switch> <chatbot/>
               </Router>
       </Switch>
       
       <br/>
+
       <Footer/>
         </Router>
     )
