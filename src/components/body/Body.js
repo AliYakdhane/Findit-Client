@@ -24,6 +24,7 @@ import dashboard from '../body/Offre Pro/dashboard'
 import Homepro from '../body/Offre Pro/Homepro/Homepro'
 import Cards from '../body/Addobject/Cards'
 import chatbot from './home/Chatbot'
+import formbuilder from '../body/formbuilder/formbuilder'
 function Body() {
     const auth = useSelector(state => state.auth)
     const {isLogged, isAdmin} = auth
@@ -34,6 +35,7 @@ function Body() {
 
             <Route path="/Homepro" component={Homepro} exact /> 
             <Route path="/Conversation" component={Chatting} exact /> 
+            <Route path="/formbuilder" component={isAdmin ? NotFound : formbuilder} exact />
 
                 <Route path="/" component={Home} exact /> 
                      <Route path="/login" component={isLogged ? NotFound : Login} exact />

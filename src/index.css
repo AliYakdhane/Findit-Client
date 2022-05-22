@@ -18,7 +18,7 @@ code {
     monospace;
 }
 .App{
-
+  object-fit: initial;
   width: 100%;
   min-height: 100vh;
   box-shadow: 0 0 20px #eee;

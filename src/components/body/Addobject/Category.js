@@ -30,7 +30,6 @@ import { FormGroup } from "react-bootstrap";
 import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import TrapFocus from '@mui/base/TrapFocus';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;

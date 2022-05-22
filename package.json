@@ -72,7 +72,9 @@
     "rsuite": "^5.9.0",
     "styled-components": "^5.3.5",
     "typeface-roboto": "^1.1.13",
-    "webfontloader": "^1.6.28"
+    "webfontloader": "^1.6.28",
+    "formBuilder": "3.0.2",
+    "jquery-ui-sortable": "1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
