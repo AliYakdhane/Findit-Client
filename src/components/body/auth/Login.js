@@ -8,7 +8,7 @@ import {
 import { dispatchLogin } from "../../../redux/actions/authAction";
 import { useDispatch } from "react-redux";
 import { GoogleLogin } from "react-google-login";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import FacebookLogin from 'react-facebook-login';
 import authSvg from "../../../assets/authlogin.svg";
 import { Button, Typography, Icon } from "@mui/material";
 import { Form, InputGroup, Input, Tooltip } from "rsuite";
@@ -76,7 +76,7 @@ function Login() {
 
   const responseGoogle = async (response) => {
     try {
-      const res = await axios.post("/user/google_login", {
+      const res = await axios.post("http://localhost:5000/user/google_login", {
         tokenId: response.tokenId,
       });
 
@@ -84,7 +84,7 @@ function Login() {
       localStorage.setItem("firstLogin", true);
 
       dispatch(dispatchLogin());
-      history.push("/profile");
+      history.push("/addobject");
     } catch (err) {
       err.response.data.msg &&
         setUser({ ...user, err: err.response.data.msg, success: "" });
@@ -93,26 +93,25 @@ function Login() {
 
   const responseFacebook = async (response) => {
     try {
-      const { accessToken, userID } = response;
-      const res = await axios.post("/user/facebook_login", {
-        accessToken,
-        userID,
-      });
+        const {accessToken, userID} = response
+        const res = await axios.post('http://localhost:5000/user/facebook_login', {accessToken, userID})
 
-      setUser({ ...user, error: "", success: res.data.msg });
-      localStorage.setItem("firstLogin", true);
+        setUser({...user, error:'', success: res.data.msg})
+        localStorage.setItem('firstLogin', true)
 
-      dispatch(dispatchLogin());
-      history.push("/Addobject");
+        dispatch(dispatchLogin())
+        history.push('/addobject')
     } catch (err) {
-      err.response.data.msg &&
-        setUser({ ...user, err: err.response.data.msg, success: "" });
+        err.response.data.msg && 
+        setUser({...user, err: err.response.data.msg, success: ''})
     }
-  };
+}
+
 
   const [errorVisible, setErrorVisible] = React.useState(false);
   const [errorPlacement, setErrorPlacement] = React.useState("bottomStart");
   const errorMessage = errorVisible ? "This field is required" : null;
+  
   return (
     <div className=" text-gray-900 flex justify-center ">
       <div className="   m-5 bg-white shadow sm:rounded-lg flex justify-center flex-1">
@@ -126,7 +125,7 @@ function Login() {
               >
                   
                     
-                    <CFormInput ttype="text" placeholder="Enter email address" id="email"
+                    <CFormInput type="text" placeholder="Enter email address" id="email"
                     value={email} name="email" onChange={handleChangeInput} /> <br/>          
                     <CFormInput type="password" placeholder="Enter password" id="password"
                     value={password} name="password" onChange={handleChangeInput} />  
@@ -198,12 +197,16 @@ function Login() {
                 <div></div>
                 <br />
                 <div style={{ display: "flex", flexDirection: "row" }}>
-                  <img
-                    style={{ marginTop: "1rem", cursor: "pointer" }}
-                    src={face}
-                    alt="facebook"
-                  />
-                  <img
+                <FacebookLogin
+                appId="1135082247289891"
+                autoLoad={false}
+                fields="name,email,picture"
+                callback={responseFacebook} 
+                />
+                  <GoogleLogin
+                  clientId="955896863448-2cs1rdresduerqslihit75jak537cogt.apps.googleusercontent.com"
+                  onSuccess={responseGoogle}
+                  cookiePolicy={'single_host_origin'}
                     style={{ marginTop: "1rem", cursor: "pointer" }}
                     src={gmail}
                     alt="gmail"

@@ -27,6 +27,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Avatar, Icon, Menu, MenuItem } from '@mui/material';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
+import {useSelector} from 'react-redux'
 
 import './gopro'
 
@@ -49,6 +50,7 @@ const useStyles = makeStyles(({ spacing }) => ({
     }
   },
 }));
+
 
 const drawerWidth = 220;
 
@@ -98,9 +100,28 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft() {
+  
+  const auth = useSelector(state => state.auth)
+
+  const {user, isLogged} = auth
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const userLink = () => {
+    return <li className="drop-nav">
+        <Link to="#" className="avatar">
+        <img src={user.avatar} alt=""/><div> {user.name}  </div> <i className="fas fa-angle-down"></i>
+        </Link>
+        <ul className="dropdown">
+            <li><Link to="/profile">Profile</Link></li>
+            <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
+        </ul>
+    </li>
+}
+
+const transForm = {
+    transform: isLogged ? "translateY(-1px)" : 0
+}
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -165,41 +186,19 @@ const cardHeaderShadowStyles = useFadedShadowStyles();
                   FIND IT
                 </Typography></Link>
               </Toolbar>
-              <Box sx={{ flexGrow: 0,marginRight:'3rem',display:'flex', flexDirection:'row' }}>
             
               
-              <NotificationsOutlinedIcon style={{width:'30px',height:'30px',maringBottom:'0.6rem'}}/>
            
-              <Avatar sx={{ bgcolor: 'primary' }} style={{width:'30px',height:'30px'}} label='A' />
-              <p className="profileName">Ali Yakdhane</p>
-              <i className="menuChevron" id="menuChevron">
-                <FaChevronDown onClick={handleOpenUserMenu}/>
-                <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                 <Link to ='/account'>
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">Account</Typography>
-                  </MenuItem></Link>
-                  <Link to ='/login'  onClick={handleLogout}>
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">Log out</Typography>
-                  </MenuItem></Link>
-               
-              </Menu> </i>            </Box>
+              <ul style={transForm}>             
+               <NotificationsOutlinedIcon style={{width:'30px',height:'30px'}}/>
+
+              {
+                  isLogged
+                  ? userLink()
+                  :<li><Link to="/login"><i className="fas fa-user"></i> Sign in</Link></li>
+              }
+              
+          </ul>                
             </AppBar>
       <Drawer
         sx={{

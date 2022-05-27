@@ -1,4 +1,4 @@
-import { Box, Paper, Typography } from '@mui/material'
+import { Box, Button, Paper, Typography } from '@mui/material'
 import React from 'react'
 import imgcover from '../../../assets/bg-presentation.jpg'
 import Container from "@mui/material/Container";
@@ -46,10 +46,52 @@ function Home() {
               textAlign="center"
               px={{ xs: 6, lg: 12 }}
               mt={1}>
-    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-    accusam et justo duo dolores et ea rebum.
+              A new service that transforms a stressful experience for your customers into a source of pleasure and loyalty to your brand
     </Typography>
+    <br/>
+    <br/>
+    <div style={{margin:'1rem'}}>
+    <Button
+    className="Button"
+      a
+      href="/infoPro"
+      style={{
+        borderRadius: 12,
+        backgroundColor: "#5D8C8E",
+        color:'#fff',
+        width:'8.5rem',
+        height:'2.8rem',
+        fontSize: "16px",
+        lineHeight:'19px',
+        fontFamily:'Roboto',
+        fontWeight:'600',
+        marginRight:'2px'
+      }}
+      variant="button"
+      sx={{ p: 0 }}
+    >
+I have lost    </Button>
+    <Button
+    className="Button"
+      a
+      href="/infoPro"
+      style={{
+        borderRadius: 12,
+        backgroundColor: "#5D8C8E",
+        width:'8.5rem',
+        color:'#fff',
+        height:'2.8rem',
+        fontSize: "16px",
+        lineHeight:'19px',
+        fontFamily:'Roboto',
+        fontWeight:'600',
+        marginLeft:'2px'
+
+      }}
+      variant="button"
+      sx={{ p: 0 }}
+    >
+I have found    </Button></div>
     </Grid>
     </Container>
     </Box>

@@ -215,11 +215,10 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Button
             className="Button"
-              a
-              href="/infoPro"
+              
               style={{
                 borderRadius: 12,
-                backgroundColor: "#5D8C8E",
+                backgroundColor: "transparent",
                 width:'8.5rem',
                 height:'2.8rem',
                 fontSize: "16px",
@@ -231,7 +230,6 @@ const Navbar = () => {
               variant="button"
               sx={{ p: 0 }}
             >
-              Offre pro
             </Button>
 
             <Menu

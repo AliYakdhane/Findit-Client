@@ -21,7 +21,7 @@ const formData = [
   }
 ];
 
-document.body.style.margin = "30px"; //For add margin in HTML body
+document.body.style.margin = ""; //For add margin in HTML body
 
 //Initialize formBuilder 
 class FormBuilder extends Component {
@@ -31,7 +31,7 @@ class FormBuilder extends Component {
   }
 
   render() {
-    return <div id="fb-editor" ref={this.fb} />;
+    return <div  ref={this.fb} />;
   }
 }
 function formbuilder() {

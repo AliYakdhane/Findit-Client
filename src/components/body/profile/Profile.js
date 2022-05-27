@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {isLength, isMatch} from '../../utils/validation/Validation'
 import {showSuccessMsg, showErrMsg} from '../../utils/notification/Notification'
 import {fetchAllUsers, dispatchGetAllUsers} from '../../../redux/actions/usersAction'
-import Avatar from "@material-ui/core/Avatar";
-import Button from '@mui/material/Button';
-
+import { CFormInput } from '@coreui/react'
 
 const initialState = {
     name: '',
@@ -62,7 +61,7 @@ function Profile() {
             formData.append('file', file)
 
             setLoading(true)
-            const res = await axios.post('http://localhost:5000/api/upload_avatar', formData, {
+            const res = await axios.post('/api/upload_avatar', formData, {
                 headers: {'content-type': 'multipart/form-data', Authorization: token}
             })
 
@@ -76,7 +75,7 @@ function Profile() {
 
     const updateInfor = () => {
         try {
-            axios.patch('http://localhost:5000/user/update', {
+            axios.patch('/user/update', {
                 name: name ? name : user.name,
                 avatar: avatar ? avatar : user.avatar
             },{
@@ -97,7 +96,7 @@ function Profile() {
             return setData({...data, err: "Password did not match.", success: ''})
 
         try {
-            axios.post('http://localhost:5000/user/reset', {password},{
+            axios.post('/user/reset', {password},{
                 headers: {Authorization: token}
             })
 
@@ -117,7 +116,7 @@ function Profile() {
             if(user._id !== id){
                 if(window.confirm("Are you sure you want to delete this account?")){
                     setLoading(true)
-                    await axios.delete(`http://localhost:5000/user/delete/${id}`, {
+                    await axios.delete(`/user/delete/${id}`, {
                         headers: {Authorization: token}
                     })
                     setLoading(false)
@@ -132,80 +131,106 @@ function Profile() {
 
     return (
         <>
-      
-        
-        <div className='w-3/4 bg-white shadow sm:rounded-lg flex justify-center'>
-        <div >
+        <div className=" text-gray-900 flex justify-center ">
+        <div className="   m-5 bg-white shadow sm:rounded-lg flex justify-center flex-1">
+          <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
+        <div>
+            {err && showErrMsg(err)}
+            {success && showSuccessMsg(success)}
+            {loading && <h3>Loading.....</h3>}
+        </div>
+        <div className="profile_page">
             <div className="col-left">
-                  <div>
-              {err && showErrMsg(err)}
-              {success && showSuccessMsg(success)}
-              {loading && <h3 style={{textAlign:'center'}}>Loading.....</h3>}
-          </div>
-         <br/> 
-            <h1 style={{textAlign:'center'}} className='text-2xl xl:text-3xl font-extrabold '>
-            {isAdmin ? "Admin Profile": "User Profile"}
-              </h1>
-        
+                <h2>{isAdmin ? "Admin Profile": "User Profile"}</h2>
 
                 <div className="avatar">
                     <img src={avatar ? avatar : user.avatar} alt=""/>
                     <span>
-                        <i style={{display:'flex', justifyContent:'center'}} className="fas fa-camera mt-5"></i>
-                        <p style={{textAlign:'center'}} className='mt-5'>Change</p>
-                         <input
-                        className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white '
-                         type="file" name="file" id="file_up" onChange={changeAvatar} />
+                        <i className="fas fa-camera"></i>
+                        <p>Change</p>
+                        <input type="file" name="file" id="file_up" onChange={changeAvatar} />
                     </span>
                 </div>
-                <form
-                className='w-full flex-1 mt-8 text-indigo-500'
-                
-              >
-                <div className="form-group">
-                   
-                    <input
-                    className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white ' type="text" name="name" id="name" defaultValue={user.name}
+                <div className="flex flex-col items-center">
+
+<form>
+               
+                    <label htmlFor="name">Name</label>
+                    <CFormInput type="text" name="name" id="name" defaultValue={user.name}
                     placeholder="Your name" onChange={handleChange} />
-                </div>
+             
+
+               
+                    <label htmlFor="email">Email</label>
+                    <CFormInput type="email" name="email" id="email" defaultValue={user.email}
+                    placeholder="Your email address" disabled />
+                
 
                 <div className="form-group">
-                   
-                    <input
-                    className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5 ' type="email" name="email" id="email" defaultValue={user.email}
-                    placeholder="Your email address"    onChange={handleChange}/>
-                </div>
-
-                <div className="form-group">
-                    
-                    <input input
-                    className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5 ' type="password" name="password" id="password"
+                    <label htmlFor="password">New Password</label>
+                    <CFormInput type="password" name="password" id="password"
                     placeholder="Your password" value={password} onChange={handleChange} />
                 </div>
 
-                <div className="form-group">
-                    
-                    <input input
-                    className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5  ' type="password" name="cf_password" id="cf_password"
+                <div className="-group">
+                    <label htmlFor="cf_password">Confirm New Password</label>
+                    <CFormInput type="password" name="cf_password" id="cf_password"
                     placeholder="Confirm password" value={cf_password} onChange={handleChange} />
+                </div></form>
+</div>
+                <div>
+                   
                 </div>
 
-                <Button disabled={loading} onClick={handleUpdate}
-                type='submit'
-                style={{backgroundColor:'#008080'}} sx={{display: "flex", justifyContent: "center",backgroundColor:'#008080',width:'19rem',height:'2rem'}} variant="contained">
-                <i className='fas fa-check fa 1x w-6  -ml-2' />
-                        <span className='ml-3'>Update</span>
-                        </Button>  
-
-           
-                </form>
-                <br/>
-                <br/>
+                <button disabled={loading} onClick={handleUpdate}>Update</button>
             </div>
 
-           </div>
-           </div>
-        
+            <div className="col-right">
+                <h2>{isAdmin ? "Users" : "My Orders"}</h2>
+
+                <div style={{overflowX: "auto"}}>
+                    <table className="customers">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Admin</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                users.map(user => (
+                                    <tr key={user._id}>
+                                        <td>{user._id}</td>
+                                        <td>{user.name}</td>
+                                        <td>{user.email}</td>
+                                        <td>
+                                            {
+                                                user.role === 1
+                                                ? <i className="fas fa-check" title="Admin"></i>
+                                                : <i className="fas fa-times" title="User"></i>
+                                            }
+                                        </td>
+                                        <td>
+                                            <Link to={`/edit_user/${user._id}`}>
+                                                <i className="fas fa-edit" title="Edit"></i>
+                                            </Link>
+                                            <i className="fas fa-trash-alt" title="Remove"
+                                            onClick={() => handleDelete(user._id)} ></i>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
         </>
     )
 }

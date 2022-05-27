@@ -13,9 +13,10 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Category from './Category'
 import addfile from "../../../assets/addfile.svg";
-import Chatbot from '../home/Chatbot'
+import Chatbotbutton from '../home/Chatbotbutton'
 import { Nav, InputPicker,Input } from 'rsuite';
 import './addobject.css'
+import ChatBot from 'react-simple-chatbot';
 
 import { Card } from "@mui/material";
 import { Form,Schema,  InputGroup, Tooltip } from 'rsuite';
@@ -265,7 +266,8 @@ export default function Addobject() {
             <p></p>
           </Card>
         </Container>
-        <Chatbot/>
+        <Chatbotbutton
+/>
         <ScrollButton/>
       </div>
   

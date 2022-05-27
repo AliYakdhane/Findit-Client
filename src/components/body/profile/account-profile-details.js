@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   Box,
   Button,
@@ -9,7 +9,14 @@ import {
   Grid,
   TextField
 } from '@mui/material';
+import axios from 'axios'
 
+import {useSelector, useDispatch} from 'react-redux'
+
+import {showSuccessMsg, showErrMsg} from '../../utils/notification/Notification'
+
+import {isLength, isMatch} from '../../utils/validation/Validation'
+import {fetchAllUsers, dispatchGetAllUsers} from '../../../redux/actions/usersAction'
 const states = [
   {
     value: 'Tunisia',
@@ -26,21 +33,15 @@ const states = [
 ];
 
 export const AccountProfileDetails = (props) => {
-  const [values, setValues] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    state: '',
-    country: ''
-  });
+ 
+const initialState = {
+  name: '',
+  password: '',
+  cf_password: '',
+  err: '',
+  success: ''
+}
 
-  const handleChange = (event) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    });
-  };
 
   return (
       <div>
@@ -71,9 +72,8 @@ export const AccountProfileDetails = (props) => {
                 helperText="Please specify the first name"
                 label="First name"
                 name="firstName"
-                onChange={handleChange}
+                
                 required
-                value={values.firstName}
                 variant="outlined"
               />
             </Grid>
@@ -86,9 +86,8 @@ export const AccountProfileDetails = (props) => {
                 fullWidth
                 label="Last name"
                 name="lastName"
-                onChange={handleChange}
+                
                 required
-                value={values.lastName}
                 variant="outlined"
               />
             </Grid>
@@ -101,9 +100,9 @@ export const AccountProfileDetails = (props) => {
                 fullWidth
                 label="Email Address"
                 name="email"
-                onChange={handleChange}
+                
                 required
-                value={values.email}
+               
                 variant="outlined"
               />
             </Grid>
@@ -116,9 +115,8 @@ export const AccountProfileDetails = (props) => {
                 fullWidth
                 label="Phone Number"
                 name="phone"
-                onChange={handleChange}
+                
                 type="number"
-                value={values.phone}
                 variant="outlined"
               />
             </Grid>
@@ -131,9 +129,7 @@ export const AccountProfileDetails = (props) => {
                 fullWidth
                 label="Country"
                 name="country"
-                onChange={handleChange}
                 required
-                value={values.country}
                 variant="outlined"
               />
             </Grid>
@@ -146,11 +142,9 @@ export const AccountProfileDetails = (props) => {
                 fullWidth
                 label="Select State"
                 name="state"
-                onChange={handleChange}
                 required
                 select
                 SelectProps={{ native: true }}
-                value={values.state}
                 variant="outlined"
               >
                 {states.map((option) => (
