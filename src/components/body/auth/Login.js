@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+import Iconify from './Iconify'
+import {Stack } from '@mui/material'
 import {
   showErrMsg,
   showSuccessMsg,
@@ -9,7 +11,7 @@ import { dispatchLogin } from "../../../redux/actions/authAction";
 import { useDispatch } from "react-redux";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from 'react-facebook-login';
-import authSvg from "../../../assets/authlogin.svg";
+import authSvg from "../../../assets/authlogin.png";
 import { Button, Typography, Icon } from "@mui/material";
 import { Form, InputGroup, Input, Tooltip } from "rsuite";
 import face from "../../../assets/face.png";
@@ -210,8 +212,25 @@ function Login() {
                     style={{ marginTop: "1rem", cursor: "pointer" }}
                     src={gmail}
                     alt="gmail"
-                  />
+                  />       <Stack direction="row" spacing={2}>
+        <Button
+        clientId="955896863448-2cs1rdresduerqslihit75jak537cogt.apps.googleusercontent.com"
+                  onSuccess={responseGoogle}
+                  cookiePolicy={'single_host_origin'}
+        fullWidth size="large" color="inherit" variant="outlined">
+          <Iconify icon="eva:google-fill" color="#DF3E30" width={22} height={22} />
+        </Button>
+        <Button 
+        appId="1135082247289891"
+        autoLoad={false}
+        fields="name,email,picture"
+        callback={responseFacebook} 
+        fullWidth size="large" color="inherit" variant="outlined">
+        <Iconify icon="eva:facebook-fill" color="#1877F2" width={22} height={22} />
+      </Button>
+      </Stack>
                 </div>
+         
               </div>
             </div>
           </div>

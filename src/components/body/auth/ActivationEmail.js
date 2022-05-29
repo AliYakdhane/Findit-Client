@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import axios from 'axios'
 import {showErrMsg, showSuccessMsg} from '../../utils/notification/Notification'
 
@@ -26,6 +26,9 @@ function ActivationEmail() {
         <div className="active_page">
             {err && showErrMsg(err)}
             {success && showSuccessMsg(success)}
+            <Link to ='/login'>
+            <p>login</p>
+            </Link>
         </div>
     )
 }

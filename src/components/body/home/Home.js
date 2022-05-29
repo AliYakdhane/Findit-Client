@@ -51,10 +51,11 @@ function Home() {
     <br/>
     <br/>
     <div style={{margin:'1rem'}}>
+    
     <Button
     className="Button"
       a
-      href="/infoPro"
+      href="/addobject"
       style={{
         borderRadius: 12,
         backgroundColor: "#5D8C8E",
@@ -74,7 +75,7 @@ I have lost    </Button>
     <Button
     className="Button"
       a
-      href="/infoPro"
+      href="/addobject"
       style={{
         borderRadius: 12,
         backgroundColor: "#5D8C8E",

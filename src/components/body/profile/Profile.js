@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 import {isLength, isMatch} from '../../utils/validation/Validation'
 import {showSuccessMsg, showErrMsg} from '../../utils/notification/Notification'
 import {fetchAllUsers, dispatchGetAllUsers} from '../../../redux/actions/usersAction'
-import { CFormInput } from '@coreui/react'
 
 const initialState = {
     name: '',
@@ -75,7 +74,7 @@ function Profile() {
 
     const updateInfor = () => {
         try {
-            axios.patch('/user/update', {
+            axios.patch('http://localhost:5000/user/update', {
                 name: name ? name : user.name,
                 avatar: avatar ? avatar : user.avatar
             },{
@@ -96,7 +95,7 @@ function Profile() {
             return setData({...data, err: "Password did not match.", success: ''})
 
         try {
-            axios.post('/user/reset', {password},{
+            axios.post('http://localhost:5000/user/reset', {password},{
                 headers: {Authorization: token}
             })
 
@@ -116,7 +115,7 @@ function Profile() {
             if(user._id !== id){
                 if(window.confirm("Are you sure you want to delete this account?")){
                     setLoading(true)
-                    await axios.delete(`/user/delete/${id}`, {
+                    await axios.delete(`http://localhost:5000/user/delete/${id}`, {
                         headers: {Authorization: token}
                     })
                     setLoading(false)
@@ -131,9 +130,6 @@ function Profile() {
 
     return (
         <>
-        <div className=" text-gray-900 flex justify-center ">
-        <div className="   m-5 bg-white shadow sm:rounded-lg flex justify-center flex-1">
-          <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
         <div>
             {err && showErrMsg(err)}
             {success && showSuccessMsg(success)}
@@ -151,35 +147,36 @@ function Profile() {
                         <input type="file" name="file" id="file_up" onChange={changeAvatar} />
                     </span>
                 </div>
-                <div className="flex flex-col items-center">
 
-<form>
-               
+                <div className="form-group">
                     <label htmlFor="name">Name</label>
-                    <CFormInput type="text" name="name" id="name" defaultValue={user.name}
+                    <input type="text" name="name" id="name" defaultValue={user.name}
                     placeholder="Your name" onChange={handleChange} />
-             
+                </div>
 
-               
+                <div className="form-group">
                     <label htmlFor="email">Email</label>
-                    <CFormInput type="email" name="email" id="email" defaultValue={user.email}
+                    <input type="email" name="email" id="email" defaultValue={user.email}
                     placeholder="Your email address" disabled />
-                
+                </div>
 
                 <div className="form-group">
                     <label htmlFor="password">New Password</label>
-                    <CFormInput type="password" name="password" id="password"
+                    <input type="password" name="password" id="password"
                     placeholder="Your password" value={password} onChange={handleChange} />
                 </div>
 
-                <div className="-group">
+                <div className="form-group">
                     <label htmlFor="cf_password">Confirm New Password</label>
-                    <CFormInput type="password" name="cf_password" id="cf_password"
+                    <input type="password" name="cf_password" id="cf_password"
                     placeholder="Confirm password" value={cf_password} onChange={handleChange} />
-                </div></form>
-</div>
+                </div>
+
                 <div>
-                   
+                    <em style={{color: "crimson"}}> 
+                    * If you update your password here, you will not be able 
+                        to login quickly using google and facebook.
+                    </em>
                 </div>
 
                 <button disabled={loading} onClick={handleUpdate}>Update</button>
@@ -227,9 +224,6 @@ function Profile() {
                     </table>
                 </div>
             </div>
-        </div>
-        </div>
-        </div>
         </div>
         </>
     )

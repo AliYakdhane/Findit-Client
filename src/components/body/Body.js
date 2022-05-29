@@ -21,7 +21,6 @@ import Homecontent from '../body/Homecontent/Homecontent'
 import Myitems from '../body/Myitems/Myitems'
 import account from '../body/profile/account'
 import dashboard from '../body/Offre Pro/dashboard'
-import Homepro from '../body/Offre Pro/Homepro/Homepro'
 import Cards from '../body/Addobject/Cards'
 import chatbot from './home/Chatbot'
 import formbuilder from '../body/formbuilder/formbuilder'
@@ -34,9 +33,9 @@ function Body() {
             <Switch>
             <Route path="/Chatbott" component={chatbot} exact /> 
 
-            <Route path="/Homepro" component={Homepro} exact /> 
             <Route path="/Conversation" component={Chatting} exact /> 
             <Route path="/formbuilder" component={isAdmin ? formbuilder : formbuilder} exact />
+            <Route path="/dashboard/home" component={isLogged ? dashboard : dashboard} exact />
 
                 <Route path="/" component={Home} exact /> 
                      <Route path="/login" component={isLogged ? NotFound : Login} exact />
@@ -52,14 +51,15 @@ function Body() {
                 <Route path="/LastItem" component={isLogged ? Homecontent : NotFound} exact />
                 <Route path="/Myitems" component={isLogged ? Myitems : NotFound} exact />
                 <Route path="/account" component={isLogged ? account : NotFound} exact />
-                <Route path="/dashboard/home" component={isLogged ? dashboard : NotFound} exact />
                 <Route path="/profile" component={isLogged ? Profile : NotFound} exact />
                 <Route path="/edit_user/:id" component={isAdmin ? EditUser : NotFound} exact />
                 </div>
            </Switch> <chatbot/>
+
               </Router>
+   
       </Switch>
-      
+    
       <br/>
 
       <Footer/>
