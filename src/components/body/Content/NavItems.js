@@ -382,15 +382,7 @@ Menu          </Typography>
             
           
         </List>
-       <Link to ='/dashboard/home'> 
-      <CardHeader
-      style={{marginTop:'12rem',cursor:'pointer',backgroundColor:'#008080'}}
-      className={cardHeaderShadowStyles.root}
-      classes={cardHeaderStyles}
-      title={'Pro Solution'}
-      subheader={'Upgrade to pro now!'}
-    />
-        </Link>
+
     
    </Drawer>
       <Main open={open}>

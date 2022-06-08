@@ -1,38 +1,20 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { Chat } from "@progress/kendo-react-conversational-ui";
+import React from 'react'
+import { Widget } from 'react-chat-widget';
 
-const MessageTemplate = (props) => {
-  return (
-    <div className="k-bubble">
-      <div>The message text is {props.item.text}</div>
-    </div>
-  );
-};
-
-const user = {
-  id: 1,
-  name: "Jane",
-  avatarUrl: "https://via.placeholder.com/24/008000/008000.png",
-};
-
-const Chatting = () => {
-  const [messages, setMessages] = React.useState([]);
-
-  const addNewMessage = (event) => {
-    setMessages([...messages, event.message]);
+import 'react-chat-widget/lib/styles.css';
+function Chat() {
+  const handleNewUserMessage = (newMessage) => {
+    console.log(`New message incoming! ${newMessage}`);
+    // Now send the message throught the backend API
   };
 
   return (
-    <div>
-      <Chat
-        user={user}
-        messages={messages}
-        onMessageSend={addNewMessage}
-        width={400}
-        messageTemplate={MessageTemplate}
+    <div className="App">
+      <Widget
+        handleNewUserMessage={handleNewUserMessage}
       />
     </div>
   );
-};
-export default Chatting
+}
+
+export default Chat

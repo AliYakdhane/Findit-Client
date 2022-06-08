@@ -15,7 +15,7 @@ function FeaturesOne() {
     <Box component="section" py={{ xs: 3, md: 12 }} borderRadius='12px' backgroundColor='#E8F1F2'>
       <Container>
       <Typography  style={{fontFamily:'Roboto',fontWeight:'700',fontSize:'30px',lineHeight:'41px',color:'#344767',textAlign:'center'}} >
-            WHY CHOOSING TROOV?            </Typography>
+            WHY CHOOSING FIND IT?            </Typography>
 <br/>
 <br/>
             <Grid container alignItems="center">
@@ -55,7 +55,6 @@ function FeaturesOne() {
                 },
               }}
             >
-Discover our Pro solution    
          <Icon sx={{marginLeft:'4px', fontWeight: "bold" }}>arrow_forward</Icon>
             </Typography>
           </Grid>

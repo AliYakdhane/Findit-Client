@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-
+import chat from  '../body/Chat/Chat.js'
 import {Switch, Route,  BrowserRouter as Router} from 'react-router-dom'
 import Login from './auth/Login'
 import Register from './auth/Register'
@@ -32,6 +32,7 @@ function Body() {
         <Router>
             <Switch>
             <Route path="/Chatbott" component={chatbot} exact /> 
+            <Route path="/Chat" component={chat} exact /> 
 
             <Route path="/Conversation" component={Chatting} exact /> 
             <Route path="/formbuilder" component={isAdmin ? formbuilder : formbuilder} exact />
