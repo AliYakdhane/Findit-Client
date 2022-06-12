@@ -24,6 +24,11 @@ import dashboard from '../body/Offre Pro/dashboard'
 import Cards from '../body/Addobject/Cards'
 import chatbot from './home/Chatbot'
 import formbuilder from '../body/formbuilder/formbuilder'
+import test from '../body/test'
+import Categorytest from './Addobject/Category.js';
+import input from '../body/formComponent/input'
+import Select from '../body/formComponent/select'
+
 function Body() {
     const auth = useSelector(state => state.auth)
     const {isLogged, isAdmin} = auth
@@ -33,6 +38,9 @@ function Body() {
             <Switch>
             <Route path="/Chatbott" component={chatbot} exact /> 
             <Route path="/Chat" component={chat} exact /> 
+            <Route path="/Addobject/:_id" component={test} exact /> 
+            <Route path="/input" component={input} exact /> 
+            <Route path="/select" component={Select} exact /> 
 
             <Route path="/Conversation" component={Chatting} exact /> 
             <Route path="/formbuilder" component={isAdmin ? formbuilder : formbuilder} exact />
@@ -48,11 +56,11 @@ function Body() {
                    <Navbarcontent/>
                 <Switch>
                 <div  style={{display:'flex',justifyContent:'center'}}>
-                <Route path="/Addobject" component={isLogged ? Addobject : NotFound} exact />
+                <Route path="/Addobject" component={Addobject} exact />
                 <Route path="/LastItem" component={isLogged ? Homecontent : NotFound} exact />
                 <Route path="/Myitems" component={isLogged ? Myitems : NotFound} exact />
                 <Route path="/account" component={isLogged ? account : NotFound} exact />
-                <Route path="/profile" component={isLogged ? Profile : NotFound} exact />
+                <Route path="/profile" component={Profile} exact />
                 <Route path="/edit_user/:id" component={isAdmin ? EditUser : NotFound} exact />
                 </div>
            </Switch> <chatbot/>
