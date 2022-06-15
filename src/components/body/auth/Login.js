@@ -11,7 +11,7 @@ import { dispatchLogin } from "../../../redux/actions/authAction";
 import { useDispatch } from "react-redux";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from 'react-facebook-login';
-import authSvg from "../../../assets/authlogin.png";
+import authSvg from "../../../assets/authlogin.svg";
 import { Button, Typography, Icon } from "@mui/material";
 import { Form, InputGroup, Input, Tooltip } from "rsuite";
 import face from "../../../assets/face.png";
@@ -50,7 +50,7 @@ function Login() {
   const handleChange = () => {
     setVisible(!visible);
   };
-  const { email, password, err, success } = user;
+  const {name, email, password, err, success } = user;
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -60,19 +60,20 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://localhost:5000/user/login`, {
+      const res = await axios.post(`http://localhost:5000/utilisateur/LoginResponsable`, {
         email,
         password,
       });
       setUser({ ...user, err: "", success: res.data.msg });
-
+      localStorage.setItem("nom",res.data.nom)
+      localStorage.setItem("email",res.data.email)
       localStorage.setItem("firstLogin", true);
 
-      dispatch(dispatchLogin());
+      
       history.push("/Addobject");
     } catch (err) {
       err.response.data.msg &&
-        setUser({ ...user, err: err.response.data.msg, success: "" });
+      console.log('-----------------------mena 7ot msg error')
     }
   };
 
@@ -99,6 +100,8 @@ function Login() {
         const res = await axios.post('http://localhost:5000/user/facebook_login', {accessToken, userID})
 
         setUser({...user, error:'', success: res.data.msg})
+        localStorage.setItem("name",response.data.name)
+        localStorage.setItem("email",res.data.email)
         localStorage.setItem('firstLogin', true)
 
         dispatch(dispatchLogin())
@@ -117,9 +120,10 @@ function Login() {
   return (
     <div className=" text-gray-900 flex justify-center ">
       <div className="   m-5 bg-white shadow sm:rounded-lg flex justify-center flex-1">
-        <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
+        <div className="lg:w-1/2 xl:w-5/12 p-8 sm:p-12">
           <div className=" flex flex-col items-center">
             <h3>SIGN IN</h3>
+          
             <div className="w-full flex-1 mt-3">
               <div className="flex flex-col items-center">
               <form
@@ -196,40 +200,10 @@ function Login() {
                   </Link>
                 </form>
 
-                <div></div>
+                <div>  {err && showErrMsg(err)}
+                {success && showSuccessMsg(success)}</div>
                 <br />
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                <FacebookLogin
-                appId="1135082247289891"
-                autoLoad={false}
-                fields="name,email,picture"
-                callback={responseFacebook} 
-                />
-                  <GoogleLogin
-                  clientId="955896863448-2cs1rdresduerqslihit75jak537cogt.apps.googleusercontent.com"
-                  onSuccess={responseGoogle}
-                  cookiePolicy={'single_host_origin'}
-                    style={{ marginTop: "1rem", cursor: "pointer" }}
-                    src={gmail}
-                    alt="gmail"
-                  />       <Stack direction="row" spacing={2}>
-        <Button
-        clientId="955896863448-2cs1rdresduerqslihit75jak537cogt.apps.googleusercontent.com"
-                  onSuccess={responseGoogle}
-                  cookiePolicy={'single_host_origin'}
-        fullWidth size="large" color="inherit" variant="outlined">
-          <Iconify icon="eva:google-fill" color="#DF3E30" width={22} height={22} />
-        </Button>
-        <Button 
-        appId="1135082247289891"
-        autoLoad={false}
-        fields="name,email,picture"
-        callback={responseFacebook} 
-        fullWidth size="large" color="inherit" variant="outlined">
-        <Iconify icon="eva:facebook-fill" color="#1877F2" width={22} height={22} />
-      </Button>
-      </Stack>
-                </div>
+               
          
               </div>
             </div>

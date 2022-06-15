@@ -110,7 +110,7 @@ export default function PersistentDrawerLeft() {
   const userLink = () => {
     return <li className="drop-nav">
         <Link to="#" className="avatar">
-        <img src={user.avatar} alt=""/><div style={{color:'#fff'}}> {user.name}  </div> <i className="fas fa-angle-down"></i>
+        <img src={user.avatar} alt=""/><div style={{color:'#fff'}}> <h3>{localStorage.getItem('name')}</h3> </div> <i className="fas fa-angle-down"></i>
         </Link>
         <ul className="dropdown">
             <li><Link to="/profile">Profile</Link></li>

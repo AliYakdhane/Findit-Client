@@ -40,7 +40,7 @@ function Register() {
     
         setUser({ ...user });
         axios
-          .post(`http://localhost:5000/user/register`, {
+          .post(`http://localhost:5000/utilisateur/addResponsable`, {
             name,
             email,
             password:cf_password
@@ -80,7 +80,6 @@ function Register() {
    
     
       <div className=' text-gray-900 flex justify-center '>
-      <ToastContainer />
 
         <div className='  m-5 bg-white shadow sm:rounded-lg flex justify-center flex-1'>
           <div className='lg:w-1/2 xl:w-5/12 p-6 sm:p-12'>

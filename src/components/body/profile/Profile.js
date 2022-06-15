@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,7 +11,7 @@ import { useTutorInfoStyles } from '@mui-treasury/styles/info/tutor';
 import { useSizedIconButtonStyles } from '@mui-treasury/styles/iconButton/sized';
 import { useDynamicAvatarStyles } from '@mui-treasury/styles/avatar/dynamic';
 import { CFormInput } from "@coreui/react";
-
+import axios from 'axios'
 const useStyles = makeStyles(() => ({
   action: {
     backgroundColor: '#fff',
@@ -24,6 +24,15 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function Profile() {
+  const [ name, password] = useState([])
+  const [ user, setUsers] = useState([])
+  useEffect(() => {
+    // GET request using axios inside useEffect React hook
+    axios.get('http://localhost:5000/user/infor/:62a1222c19339f343caa1f9a')
+        .then(response => setUsers(response.data.total));
+
+// empty dependency array means this effect will only run once (like componentDidMount in classes)
+}, []);
   const styles = useStyles();
   const iconBtnStyles = useSizedIconButtonStyles({ padding: 6 });
   const avatarStyles = useDynamicAvatarStyles({ radius: 28, size: 58, marginTop:'1rem'});
@@ -48,10 +57,10 @@ export default function Profile() {
       </Item>
       </div>
       <div style={{display:'flex',justifyContent:'center'}} >
-     
-      <Info  useStyles={useTutorInfoStyles}>
-        <InfoTitle >Ali Yakdhane</InfoTitle>
-      </Info>
+     {user.map((val,key)=>(
+      <Info key={key} useStyles={useTutorInfoStyles}>
+        <InfoTitle >{val.name}</InfoTitle>
+      </Info>))}
      </div> 
      <br/>
      <br/>
