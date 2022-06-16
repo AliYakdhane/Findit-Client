@@ -57,25 +57,24 @@ function Login() {
     setUser({ ...user, [name]: value, err: "", success: "" });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post(`http://localhost:5000/utilisateur/LoginResponsable`, {
-        email,
-        password,
-      });
-      setUser({ ...user, err: "", success: res.data.msg });
-      localStorage.setItem("nom",res.data.nom)
-      localStorage.setItem("email",res.data.email)
-      localStorage.setItem("firstLogin", true);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await axios.post(`http://localhost:5000/utilisateur/LoginResponsable`, {
+      email,
+      password,
+    });
+    setUser({ ...user, err: "", success: res.data.msg });
 
-      
-      history.push("/Addobject");
-    } catch (err) {
-      err.response.data.msg &&
-      console.log('-----------------------mena 7ot msg error')
-    }
-  };
+    localStorage.setItem("firstLogin", true);
+
+    dispatch(dispatchLogin());
+    history.push("/Addobject");
+  } catch (err) {
+    err.response.data.msg &&
+      setUser({ ...user, err: err.response.data.msg, success: "" });
+  }
+};
 
   const responseGoogle = async (response) => {
     try {

@@ -30,23 +30,32 @@ export default function Addobject() {
 
   
   const [open, setOpen] = React.useState(false);
+  const [adresse, setAdresse] = React.useState('')
+  const [date, setDate] = React.useState('')
 
- const  [object, setObject]= React.useState('')
+ const [statut, setStatut] = React.useState('object')
 
-const submitHandler = (e)=>{
-  e.preventDefault();
+ const changesattus = ()=> {
+   if(statut === 'object') {
+    setStatut('object2')
+    localStorage.setItem('statut', 'LOSt');
+   }else {
+    setStatut('object')
+    localStorage.setItem('statut', 'found');
+   }
+ }
+const changeAdresse = event => {
+setAdresse(event.target.value)
+console.log(event.target.value);
+localStorage.setItem('adress',adresse);
+
 }
-const postData = {object}
-console.log(postData)  
-Axios.post(`http://localhost:5000/object/addObject`, postData)
-.then((res)=> {
-  console.log(res)
-})
-.catch((err)=> {
-  console.log(err)
-})
-
-
+const changeDate = event => {
+  setDate(event.target.value)
+  console.log(event.target.value);
+  localStorage.setItem('date',date);
+  
+  }
   return (
    
       <div className=" flex justify-center  ">
@@ -78,7 +87,7 @@ Axios.post(`http://localhost:5000/object/addObject`, postData)
           </Button>
             </div>
             <br/>
-            <form onSubmit={submitHandler}>
+            <form >
             <div className="wrapper">
 <div style={{maxWidth:'60rem'}}>
             <div style={{ marginLeft: "12px" }}>
@@ -86,11 +95,11 @@ Axios.post(`http://localhost:5000/object/addObject`, postData)
               <h4 style={{ fontSize: "21px",color:'#495057', fontFamily: "Roboto",fontWeight:'400',lineHeight:'21px',textTransform:'none' }}>Status</h4>
             </div><br/>
             <div style={{  display:'flex',flexDirection:'row' }}>
-            <select style={{width:'100%',border:'1px solid #ddd',borderRadius:'6px',height:'2.5rem'}} placeholder="Select your status" >
-            <option value='object' onChange={(e)=>{setObject(e.target.value)}} >
+            <select onChange={()=>{changesattus()}} style={{width:'100%',border:'1px solid #ddd',borderRadius:'6px',height:'2.5rem'}} placeholder="Select your status" value={statut} >
+            <option onChange={()=>{localStorage.setItem('status', 'Lost');}} value='object2' >
             Lost
             </option>
-            <option value='object'  onChange={(e)=>{setObject(e.target.value)}} name='statut' id='statut'>
+            <option  onChange={()=>{localStorage.setItem('status', 'Found');}} value='object'  name='statut' id='statut'>
             Found
             </option>
             </select>
@@ -104,8 +113,8 @@ Axios.post(`http://localhost:5000/object/addObject`, postData)
             </div>
             <br/>
              
-            <CFormInput style={{borderRadius:'8px'}} type="text" placeholder="Enter adress of lost/found" id="adress"
-            name="adress" value='object'  onChange={(e)=>{setObject(e.target.value)}} />
+            <CFormInput onChange={changeAdresse}  style={{borderRadius:'8px'}} type="text" placeholder="Enter adress of lost/found" id="adress"
+            name="adress" value={adresse}  />
             <br/>
 
             <div>
@@ -113,23 +122,8 @@ Axios.post(`http://localhost:5000/object/addObject`, postData)
                 <h4 style={{ fontSize: "21px",color:'#495057', fontFamily: "Roboto",fontWeight:'400',lineHeight:'21px',textTransform:'none' }}>When?</h4>
               </div>
               <br/>
-              <DatePicker  
-              style={{width:'53.5ch'}}
-              format="yyyy-MM-dd HH:mm:ss"
-              locale={{
-                sunday: 'Su',
-                monday: 'Mo',
-                tuesday: 'Tu',
-                wednesday: 'We',
-                thursday: 'Th',
-                friday: 'Fr',
-                saturday: 'Sa',
-                ok: 'OK',
-                today: 'Today',
-                yesterday: 'Yesterday',
-              
-              }}
-            />
+              <CFormInput onChange={changeDate}  style={{borderRadius:'8px'}} type="date" placeholder="Enter date" id="date"
+              name="date" value={date}  />
             </div></div>
             <div
             className="  w-full bg-contain flex flex-center bg-center bg-no-repeat"

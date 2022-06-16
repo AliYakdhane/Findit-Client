@@ -26,7 +26,7 @@ export default function App() {
   const submitHandler = (e)=>{
     e.preventDefault();
   }
-  const postData = {object}
+  const postData = [object, localStorage.getItem("statut"),localStorage.getItem("adress"),localStorage.getItem("date")]
   console.log(postData)  
   Axios.post(`http://localhost:5000/object/addObject`, postData)
   .then((res)=> {

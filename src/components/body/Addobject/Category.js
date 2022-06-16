@@ -17,22 +17,7 @@ export default function Category() {
 
 
 
- 
-  const  [object, setObject]= React.useState('')
 
-  const submitHandler = (e)=>{
-    e.preventDefault();
-  }
-  const postData = {object}
-  console.log(postData)  
-  Axios.post(`http://localhost:5000/object/addObject`, postData)
-  .then((res)=> {
-    console.log(res)
-  })
-  .catch((err)=> {
-    console.log(err)
-  })
-  
   
 
   const [valuee, setValuee] = React.useState("female");
