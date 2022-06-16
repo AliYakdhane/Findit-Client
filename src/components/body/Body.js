@@ -55,7 +55,7 @@ function Body() {
                    <Navbarcontent/>
                 <Switch>
                 <div  style={{display:'flex',justifyContent:'center'}}>
-                <Route path="/Addobject/:_id" component={test} exact /> 
+                <Route path="/" component={test} exact /> 
 
                 <Route path="/Addobject" component={Addobject} exact />
                 <Route path="/LastItem" component={isLogged ? Homecontent : NotFound} exact />

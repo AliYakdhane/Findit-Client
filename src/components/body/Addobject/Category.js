@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Button from '@mui/material/Button';
 import Cards from './Cards'
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import Axios from 'axios'
+import { Box, Card, Grid, Stack, Typography } from "@mui/material";
+import Axios from "axios";
 
+import { Link } from "react-router-dom";import {
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCardImage,
+  MDBBtn,
+} from "mdb-react-ui-kit";
 
 export default function Category() {
 
-  
+  const [categorys, setCategorys] = useState([])
+  useEffect(() => {
+    Axios.get('http://localhost:5000/Category').then(res => {
+      setCategorys(res.data)
+    })
+  },[])
 
 
   
@@ -43,7 +57,43 @@ export default function Category() {
         >
     
           <br />
-<Cards/>
+          <Grid display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1}>
+    {  categorys.map((val,key) => (
+      <Stack spacing={1} sx={{ p: 2 }}>
+      <Link to={`/Addobject/${val._id}`}>
+      <MDBCard
+      key={key}
+    
+      style={{
+        maxWidth: "12rem",
+        minHeight: "11rem",
+        borderRadius: "12px",
+        backgroundColor: "white",
+        alignItems: "center",
+        justifyContent: "center",
+        display: "inline-block",
+        margin: "1rem",
+        
+      }}
+            > 
+            <MDBCardBody style={{borderBottom:'1px solid #ddd'}}>
+            <MDBCardTitle value='object'  style={{ textAlign: "center" }} name='categoryName' id='categoryName'>
+            {val.name}
+            </MDBCardTitle>
+          </MDBCardBody>
+          <MDBCardImage
+            style={{ borderRadius: "12px", maxWidth: "11rem",
+            minHeight: "11rem" }}
+            src={val.image}
+            position="top"
+            alt="..."
+          />
+        </MDBCard></Link>
+        </Stack>))
+      
+  }
+
+      </Grid>
 <br/>
 
           <br/>
