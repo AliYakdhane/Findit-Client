@@ -67,6 +67,7 @@ const handleSubmit = async (e) => {
     setUser({ ...user, err: "", success: res.data.msg });
 
     localStorage.setItem("firstLogin", true);
+    localStorage.setItem("responsibleId",res.data.ResponsableId)
 
     dispatch(dispatchLogin());
     history.push("/Addobject");

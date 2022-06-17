@@ -7,7 +7,7 @@ import Input from "./formComponent/input";
 import Select from "./formComponent/select";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-export default function Test() {
+export default function Test({categoryId}) {
 
 const [data, setData] = useState({
   refUser:  '',
@@ -34,7 +34,6 @@ const handleSubmit = (e) => {
     ;
   });
 }
-  let { _id } = useParams();
   const [form, setForm] = useState(null);
   const getType = (type, placeholder, options, title) => {
 
@@ -55,7 +54,7 @@ const handleSubmit = (e) => {
     }
   };
   useEffect(() => {
-    Axios.get(`http://localhost:5000/Category/${_id}`).then((res) => {
+    Axios.get(`http://localhost:5000/Category/${categoryId}`).then((res) => {
       const tempArray = [];
       (res.data.formId.formData).map((ele) => {
         if (ele.type === "Text") {

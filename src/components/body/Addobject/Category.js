@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";import {
   MDBBtn,
 } from "mdb-react-ui-kit";
 
-export default function Category() {
+export default function Category({setCategory}) {
 
   const [categorys, setCategorys] = useState([])
   useEffect(() => {
@@ -60,10 +60,9 @@ export default function Category() {
           <Grid display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1}>
     {  categorys.map((val,key) => (
       <Stack spacing={1} sx={{ p: 2 }}>
-      <Link to={`/Addobject/${val._id}`}>
       <MDBCard
       key={key}
-    
+      onClick={() => setCategory(val._id)}
       style={{
         maxWidth: "12rem",
         minHeight: "11rem",
@@ -88,7 +87,7 @@ export default function Category() {
             position="top"
             alt="..."
           />
-        </MDBCard></Link>
+        </MDBCard>
         </Stack>))
       
   }
