@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/eslint-parser": "^7.17.0",
+    "@blueprintjs/core": "^4.5.1",
     "@chakra-ui/react": "^1.8.8",
     "@coreui/react": "^4.1.2",
     "@date-io/date-fns": "^2.13.1",

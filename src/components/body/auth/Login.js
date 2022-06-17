@@ -71,45 +71,15 @@ const handleSubmit = async (e) => {
     dispatch(dispatchLogin());
     history.push("/Addobject");
   } catch (err) {
+    console.log(err.data)
     err.response.data.msg &&
       setUser({ ...user, err: err.response.data.msg, success: "" });
   }
 };
 
-  const responseGoogle = async (response) => {
-    try {
-      const res = await axios.post("http://localhost:5000/user/google_login", {
-        tokenId: response.tokenId,
-      });
+  
 
-      setUser({ ...user, error: "", success: res.data.msg });
-      localStorage.setItem("firstLogin", true);
 
-      dispatch(dispatchLogin());
-      history.push("/addobject");
-    } catch (err) {
-      err.response.data.msg &&
-        setUser({ ...user, err: err.response.data.msg, success: "" });
-    }
-  };
-
-  const responseFacebook = async (response) => {
-    try {
-        const {accessToken, userID} = response
-        const res = await axios.post('http://localhost:5000/user/facebook_login', {accessToken, userID})
-
-        setUser({...user, error:'', success: res.data.msg})
-        localStorage.setItem("name",response.data.name)
-        localStorage.setItem("email",res.data.email)
-        localStorage.setItem('firstLogin', true)
-
-        dispatch(dispatchLogin())
-        history.push('/addobject')
-    } catch (err) {
-        err.response.data.msg && 
-        setUser({...user, err: err.response.data.msg, success: ''})
-    }
-}
 
 
   const [errorVisible, setErrorVisible] = React.useState(false);

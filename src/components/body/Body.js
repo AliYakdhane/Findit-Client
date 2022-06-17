@@ -28,7 +28,7 @@ import test from '../body/test'
 import Categorytest from './Addobject/Category.js';
 import input from '../body/formComponent/input'
 import Select from '../body/formComponent/select'
-
+import Matching from '../Matchings/Matching'
 function Body() {
     const auth = useSelector(state => state.auth)
     const {isLogged, isAdmin} = auth
@@ -55,7 +55,8 @@ function Body() {
                    <Navbarcontent/>
                 <Switch>
                 <div  style={{display:'flex',justifyContent:'center'}}>
-                <Route path="/" component={test} exact /> 
+                <Route path="/Addobject/:_id" component={test} exact /> 
+                <Route path="/Matching" component={Matching} exact />
 
                 <Route path="/Addobject" component={Addobject} exact />
                 <Route path="/LastItem" component={isLogged ? Homecontent : NotFound} exact />

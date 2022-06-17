@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { CFormInput } from "@coreui/react";
 import Page from './Page'
-function input({placeholder, title}) {
+function input({placeholder, title,value}) {
 
 
   
