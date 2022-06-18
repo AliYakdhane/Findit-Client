@@ -60,14 +60,16 @@ function Login() {
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const res = await axios.post(`http://localhost:5000/utilisateur/LoginResponsable`, {
+    const res = await axios.post(`http://localhost:5000/user/login`, {
       email,
       password,
+      name,
     });
     setUser({ ...user, err: "", success: res.data.msg });
 
     localStorage.setItem("firstLogin", true);
-    localStorage.setItem("responsibleId",res.data.ResponsableId)
+    localStorage.setItem("userId",res.data.userId)
+    localStorage.setItem("name",user.name)
 
     dispatch(dispatchLogin());
     history.push("/Addobject");

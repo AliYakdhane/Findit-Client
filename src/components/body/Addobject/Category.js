@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";import {
 } from "mdb-react-ui-kit";
 
 export default function Category({setCategory}) {
+  const [adresse, setAdresse] = React.useState("");
 
   const [categorys, setCategorys] = useState([])
   useEffect(() => {
@@ -61,6 +62,7 @@ export default function Category({setCategory}) {
     {  categorys.map((val,key) => (
       <Stack spacing={1} sx={{ p: 2 }}>
       <MDBCard
+     
       key={key}
       onClick={() => setCategory(val._id)}
       style={{
@@ -79,7 +81,7 @@ export default function Category({setCategory}) {
             <MDBCardTitle value='object'  style={{ textAlign: "center" }} name='categoryName' id='categoryName'>
             {val.name}
             </MDBCardTitle>
-          </MDBCardBody>
+          </MDBCardBody> 
           <MDBCardImage
             style={{ borderRadius: "12px", maxWidth: "11rem",
             minHeight: "11rem" }}

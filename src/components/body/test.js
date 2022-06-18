@@ -6,8 +6,10 @@ import { useParams } from "react-router-dom";
 import Input from "./formComponent/input";
 import Select from "./formComponent/select";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { CFormInput } from "@coreui/react";
 
 export default function Test({categoryId}) {
+  const [nameCategory, setNameCategory] = React.useState("");
 
 const [data, setData] = useState({
   refUser:  '',
@@ -25,7 +27,7 @@ const handleChange = (e) => {
 const handleSubmit = (e) => {
   e.preventDefault();
   const objectData = {
-    refUser:  ``,    categoryName:'electronicccs',
+    refUser:  localStorage.getItem("responsableId"),   
     statut: localStorage.getItem("statut"), adress: localStorage.getItem("adress"), objectDate: localStorage.getItem("date"),
     formInput: data.formInput
   };
@@ -34,6 +36,11 @@ const handleSubmit = (e) => {
     ;
   });
 }
+  const changeNameCat = (event) => {
+    setNameCategory(event.target.value);
+    console.log(event.target.value);
+    localStorage.setItem("nameCategory", nameCategory);
+  };
   const [form, setForm] = useState(null);
   const getType = (type, placeholder, options, title) => {
 
@@ -78,18 +85,21 @@ const handleSubmit = (e) => {
   }, []);
   return (
     <Container  fixed sx={{Width:300}}> 
-    <Card
-    sx={{
-      boxShadow: 10,
-      borderRadius:6,
-      p: 2,
-      mx: { xs: 4, lg: 4 },
-      
-      
-    }}>
+  
 
       {form?.map((ele) => {
-        return <form onSubmit={handleSubmit}><div value={data.formInput}>{ele.type} </div>
+        return <form onSubmit={handleSubmit}>
+            
+        <h4 style={{ fontSize: "21px",color:'#495057', fontFamily: "Roboto",fontWeight:'400',lineHeight:'21px',textTransform:'none' }}>Confirm Category Name</h4>
+        <br/>
+        <div style={{width:'30%'}}>
+        
+    <CFormInput  onChange={changeNameCat}
+    type="" placeholder="Confirm the name of category!" id="nameCategory"
+               value={nameCategory}        name="nameCategory" />
+    
+        </div><br/>
+        <div value={data.formInput}>{ele.type} </div>
         <Button type="submit" sx={{
             backgroundColor: "#5D8C8E",
             width:'14.5rem',
@@ -101,12 +111,6 @@ const handleSubmit = (e) => {
             margin:'auto',}} variant="contained"> <AddCircleOutlineIcon style={{marginRight:'4px'}}/>Add Item</Button></form>;
       })}
       <br/>
-          <div style={{      
-           
-          display: "flex", justifyContent: "center" }}>
-         
-          </div>
-          <br/>
-    </Card> </Container>
+ </Container>
   );
 }
