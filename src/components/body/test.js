@@ -28,11 +28,12 @@ export default function Test({ categoryId }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const objectData = {
-      refUser: localStorage.getItem("responsableId"),
+    var objectData = {
+      userId: localStorage.getItem("userId"),
       statut: localStorage.getItem("statut"),
       adress: localStorage.getItem("adress"),
       objectDate: localStorage.getItem("date"),
+      categoryName: localStorage.getItem("nameCategory"),
       formInput: data.formInput,
     };
     Axios.post(`http://localhost:5000/object/addObject`, objectData).then(
@@ -63,21 +64,21 @@ export default function Test({ categoryId }) {
   useEffect(() => {
     Axios.get(`http://localhost:5000/Category/${categoryId}`).then((res) => {
       const tempArray = [];
-      let ele = res.data.formId.formData;
-      if (ele.type === "Text") {
-        tempArray.push({
-          type: getType(ele.type, ele.placeholder, ele.options, ele.title),
-        });
-      } else if (ele.type === "SELECT") {
-        tempArray.push({
-          type: getType(ele.type, ele.placeholder, ele.options, ele.title),
-        });
-      } else if (ele.type === "Color") {
-        tempArray.push({
-          type: getType(ele.type, ele.placeholder, ele.options, ele.title),
-        });
-      }
-
+      res.data.formId.formData.map((ele) => {
+        if (ele.type === "Text") {
+          tempArray.push({
+            type: getType(ele.type, ele.placeholder, ele.options, ele.title),
+          });
+        } else if (ele.type === "SELECT") {
+          tempArray.push({
+            type: getType(ele.type, ele.placeholder, ele.options, ele.title),
+          });
+        } else if (ele.type === "Color") {
+          tempArray.push({
+            type: getType(ele.type, ele.placeholder, ele.options, ele.title),
+          });
+        }
+      });
       setForm(tempArray);
       console.log(tempArray);
     });

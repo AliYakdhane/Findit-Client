@@ -36,7 +36,7 @@ export default function Addobject() {
   const changesattus = () => {
     if (statut === "object") {
       setStatut("object2");
-      localStorage.setItem("statut", "LOSt");
+      localStorage.setItem("statut", "lost");
     } else {
       setStatut("object");
       localStorage.setItem("statut", "found");
