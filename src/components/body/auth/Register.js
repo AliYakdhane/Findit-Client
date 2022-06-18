@@ -34,47 +34,32 @@ function Register() {
 
 
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (name && email && password) {
-    
-        setUser({ ...user });
-        axios
-          .post(`http://localhost:5000/utilisateur/addResponsable`, {
-            name,
-            email,
-            password:cf_password
-          })
-          .then(res => {
-            setUser({
-              ...user,
-              name: '',
-              email: '',
-              password: '',
-              cf_password: '',
-             
-            });
+ 
+const handleSubmit = async e => {
+  e.preventDefault()
+  if(isEmpty(name) || isEmpty(password))
+          return setUser({...user, err: "Please fill in all fields.", success: ''})
 
-            toast.success(res.data.message);
-          })
-          .catch(err => {
-            setUser({
-              ...user,
-              name: '',
-              email: '',
-              password: '',
-              cf_password: '',
-      
-            });
-            console.log(err.response);
-            toast.error(err.response.data.errors);
-          });
-      
-       
-    } else {
-      toast.error('Please fill all fields');
-    }
-  };
+  if(!isEmail(email))
+      return setUser({...user, err: "Invalid emails.", success: ''})
+
+  if(isLength(password))
+      return setUser({...user, err: "Password must be at least 6 characters.", success: ''})
+  
+  if(!isMatch(password, cf_password))
+      return setUser({...user, err: "Password did not match.", success: ''})
+
+  try {
+      const res = await axios.post('http://localhost:5000/user/register', {
+          name, email, password
+      })
+
+      setUser({...user, err: '', success: res.data.msg})
+  } catch (err) {
+      err.response.data.msg && 
+      setUser({...user, err: err.response.data.msg, success: ''})
+  }
+}
 
     return (
    
@@ -123,8 +108,11 @@ function Register() {
                     
                  
                 </div>
+
                <br/>
-                {err && showErrMsg(err)}
+               <div style={{width:'3rem',color:'red',display:'flex',alignContent:'center'}}>
+               <ToastContainer style={{width:'3rem',color:'red',display:'flex',justifyContent:'center'}}/> </div>
+               {err && showErrMsg(err)}
                 {success && showSuccessMsg(success)}
          
                 <br/>

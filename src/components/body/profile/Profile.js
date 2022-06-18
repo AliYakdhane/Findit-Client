@@ -89,7 +89,7 @@ export default function Profile() {
       if (localStorage.getItem('userId') !== id) {
         if (window.confirm('Are you sure you want to delete this account?')) {
           setLoading(true);
-          await axios.delete(`/user/delete/${id}`);
+          await axios.delete(`http://localhost:5000/user/delete/${localStorage.getItem('userId')}`);
           setLoading(false);
           setCallback(!callback);
         }
@@ -150,8 +150,8 @@ export default function Profile() {
                   style={{ marginRight: '5px' }}
                   type="text"
                   placeholder={categorys.email}
-                  id="email"
-                  name="email"
+                  id="name"
+                  name="name"
                 />{' '}
                 <br />
                 <CFormInput
@@ -192,6 +192,11 @@ export default function Profile() {
             <br /> <br />
             <Button variant="contained" to="#" disabled={loading} onClick={handleUpdate}>
               Update
+            </Button>
+            <br/>
+           
+            <Button style={{backgroundColor:'red'}} variant="contained" to="#"  onClick={handleDelete}>
+              Delete Account
             </Button>
             <div>
             {err && showErrMsg(err)}

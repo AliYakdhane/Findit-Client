@@ -36,7 +36,7 @@ export default function RecipeReviewCard() {
 
   React.useEffect(() => {
     
-    Axios.get(`http://localhost:5000/object/getobject/${localStorage.getItem('userId')}`).then((res) => {
+    Axios.get(`http://localhost:5000/object/getObject/${localStorage.getItem('userId')}`).then((res) => {
       // let aaa = Object.entries(res.data);
       // console.info(aaa);
       setItem(res.data);
@@ -65,7 +65,7 @@ export default function RecipeReviewCard() {
   
       <br/>
       {  item.map((val,key) => (
-      <Card style={{border:'0.5px solid gray', margin:'2rem', borderRadius:'15px'}} sx={{ maxWidth: 280, minHeight:'60ch' }}> 
+      <Card key={key} style={{border:'0.5px solid gray', margin:'2rem', borderRadius:'15px'}} sx={{ maxWidth: 280, minHeight:'60ch' }}> 
 
       <CardContent> 
       <Grid item>
@@ -85,7 +85,6 @@ export default function RecipeReviewCard() {
       <br/>
         <h6 style={{textAlign:'center',color:'#a7a7a7'}}>September 14, 2022</h6>
         <h6 style={{textAlign:'center',color:'#a7a7a7'}}>
-         Hammamet Nord , Mrezga
         </h6>
         </div>
         <br/>
