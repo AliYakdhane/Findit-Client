@@ -28,9 +28,10 @@ import { Avatar, Icon, Menu, MenuItem } from '@mui/material';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import {useSelector} from 'react-redux'
-
+import { useEffect } from 'react';
+import { useState } from 'react';
 import './gopro'
-
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 
 const useStyles = makeStyles(({ spacing }) => ({
   card: {
@@ -107,7 +108,7 @@ export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const userLink = () => {
+/*  const userLink = () => {
     return <li className="drop-nav">
         <Link to="#" className="avatar">
         <img src={user.avatar} alt=""/><div style={{color:'#fff'}}> <h3>{localStorage.getItem('name')}</h3> </div> <i className="fas fa-angle-down"></i>
@@ -118,7 +119,17 @@ export default function PersistentDrawerLeft() {
         </ul>
     </li>
 }
+*/
+const [categorys, setCategorys] = useState({});
 
+useEffect(() => {
+  console.info(categorys);
+  axios.get(`http://localhost:5000/user/profil/${localStorage.getItem('userId')}`).then((res) => {
+    // let aaa = Object.entries(res.data);
+    // console.info(aaa);
+    setCategorys(res.data);
+  });
+}, []);
 const transForm = {
     transform: isLogged ? "translateY(-1px)" : 0
 }
@@ -139,7 +150,7 @@ const transForm = {
   const handleLogout = async () => {
     try {
         await axios.get('http://localhost:5000/user/logout')
-        localStorage.removeItem('firstLogin')
+        localStorage.clear();
         window.location.href = "/login";
     } catch (err) {
         window.location.href = "/login";
@@ -190,13 +201,10 @@ const cardHeaderShadowStyles = useFadedShadowStyles();
               
            
               <ul style={transForm}>             
-               <NotificationsOutlinedIcon style={{width:'30px',height:'30px'}}/>
 
-              {
-                  isLogged
-                  ? userLink()
-                  :<li><Link to="/login"><i className="fas fa-user"></i> Sign in</Link></li>
-              }
+           
+                  <li><Link to="/profile">{categorys.name}</Link></li>
+                  <li><MeetingRoomIcon onClick={handleLogout} /></li>
               
           </ul>                
             </AppBar>
