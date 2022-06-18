@@ -200,10 +200,10 @@ const cardHeaderShadowStyles = useFadedShadowStyles();
             
               
            
-              <ul style={transForm}>             
+              <ul >             
 
            
-                  <li><Link to="/profile">{categorys.name}</Link></li>
+                  <li style={{marginTop:'1rem'}}><Link to="/profile">{categorys.name}</Link></li>
                   <li><MeetingRoomIcon onClick={handleLogout} /></li>
               
           </ul>                

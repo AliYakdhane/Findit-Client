@@ -42,14 +42,14 @@ function Body() {
             <Route path="/select" component={Select} exact /> 
 
             <Route path="/Conversation" component={Chatting} exact /> 
-            <Route path="/formbuilder" component={isAdmin ? formbuilder : formbuilder} exact />
-            <Route path="/dashboard/home" component={isLogged ? dashboard : dashboard} exact />
+            <Route path="/formbuilder" component={formbuilder} exact />
+            <Route path="/dashboard/home" component={ dashboard} exact />
 
                 <Route path="/" component={Home} exact /> 
-                     <Route path="/login" component={isLogged ? NotFound : Login} exact />
-                <Route path="/register" component={isLogged ? NotFound : Register} exact />
-                <Route path="/forgot_password" component={isLogged ? NotFound : ForgotPass} exact />
-                <Route path="/user/reset/:token" component={isLogged ? NotFound : ResetPass} exact />
+                     <Route path="/login" component={Login} exact />
+                <Route path="/register" component={Register} exact />
+                <Route path="/forgot_password" component={ForgotPass} exact />
+                <Route path="/user/reset/:token" component={ResetPass} exact />
                 <Route path="/user/activate/:activation_token" component={ActivationEmail} exact />
                <Router>
                    <Navbarcontent/>
@@ -59,11 +59,11 @@ function Body() {
                 <Route path="/Matching" component={Matching} exact />
 
                 <Route path="/Addobject" component={Addobject} exact />
-                <Route path="/LastItem" component={isLogged ? Homecontent : NotFound} exact />
-                <Route path="/Myitems" component={isLogged ? Myitems : NotFound} exact />
-                <Route path="/account" component={isLogged ? account : NotFound} exact />
+                <Route path="/LastItem" component={Homecontent} exact />
+                <Route path="/Myitems" component={Myitems} exact />
+                <Route path="/account" component={account} exact />
                 <Route path="/profile" component={Profile} exact />
-                <Route path="/edit_user/:id" component={isAdmin ? EditUser : NotFound} exact />
+                <Route path="/edit_user/:id" component={EditUser} exact />
                 </div>
            </Switch> <chatbot/>
 
