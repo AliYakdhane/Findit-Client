@@ -20,6 +20,8 @@ import devices0 from '../../../assets/devices0.gif'
 import Container from "@mui/material/Container";
 import { Grid } from '@mui/material';
 import Axios from 'axios';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -33,7 +35,22 @@ const ExpandMore = styled((props) => {
 
 export default function RecipeReviewCard() {
   const [item, setItem] = React.useState([]);
-
+  const [loading, setLoading] = useState(false);
+  const [callback, setCallback] = useState(false);
+  const handleDelete = async (id) => {
+    try {
+      if (localStorage.getItem('userId') !== id) {
+        if (window.confirm('Are you sure you want to delete this account?')) {
+          setLoading(true);
+          await Axios.delete(`http://localhost:5000/user/delete/${localStorage.getItem('userId')}`);
+          setLoading(false);
+          setCallback(!callback);
+        }
+      }
+    } catch (err) {
+      
+    }
+  };
   React.useEffect(() => {
     
     Axios.get(`http://localhost:5000/object/getObject/${localStorage.getItem('userId')}`).then((res) => {
@@ -77,42 +94,50 @@ export default function RecipeReviewCard() {
           borderRadius:'50%'
         }}
       >
-       <h5 style={{display:'flex',justifyContent:'center',color:'#fff'}}>L</h5>
+       <h5 style={{display:'flex',justifyContent:'center',color:'#fff'}}>{val.statut?"L":"F"}</h5>
       </Box>
     </Grid>
       <div>
-      <h5 style={{textAlign:'center'}}>Tablet</h5>
+      <h5 style={{textAlign:'center'}}>{val.refCategory.name}</h5>
       <br/>
-        <h6 style={{textAlign:'center',color:'#a7a7a7'}}>September 14, 2022</h6>
+        <h6 style={{textAlign:'center',color:'#a7a7a7'}}>{val.objectDate}</h6>
         <h6 style={{textAlign:'center',color:'#a7a7a7'}}>
+          {val.adress}
         </h6>
         </div>
         <br/>
       </CardContent> 
-      <CardMedia
-        component="img"
-        height="194"
-        image={devices0}
-        alt="category"
-      />
+      <h6 style={{textAlign:'center',color:'#a7a7a7'}}>
+        Name:  {val.formInput.Name}
+        </h6>
+        <h6 style={{textAlign:'center',color:'#a7a7a7'}}>
+        Color:  {val.formInput.Color}
+        </h6>
+        <h6 style={{textAlign:'center',color:'#a7a7a7'}}>
+        Description:  {val.formInput.Description ? val.formInput.Description :"Empty"}
+        </h6>
      <br/>
+     <br/>
+
       <div className='flex flex-column items-center justify-center space-x-5' >
+        <Link to ='Matching'>
       <button
       style={{backgroundColor:'#fff',border:'2px solid #5D8C8E'}}   
       className='w-3/4   font-bold shadow-sm  rounded-lg py-2 text-black flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline '
       >
       
-      <span className=' items-center text-color-black'>Preview</span>
-    </button>
+      <span className=' items-center text-color-black'>Show Matching</span>
+    </button></Link>
        </div>
        <br/>
        <div className='flex flex-column items-center justify-center space-x-5' >
        <button
+       onClick={handleDelete}
       style={{backgroundColor:'#fff',border:'2px solid #5D8C8E'}}   
       className='w-3/4   font-bold shadow-sm  rounded-lg py-2 text-black flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline '
       >
       
-      <span className=' items-center text-color-black'>Preview</span>
+      <span className=' items-center text-color-black'>Delete</span>
     </button>
       </div>
     </Card>))}

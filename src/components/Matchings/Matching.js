@@ -56,7 +56,7 @@ const style = {
     boxShadow: 24,
     p: 0,
   };
-export const ElevatedHeaderCardDemo = React.memo(function ElevatedHeaderCard() {
+export const ElevatedHeaderCardDemo = React.memo(function ElevatedHeaderCard(objectId) {
   const classes = useStyles();
   const [categorys, setCategorys] = useState([])
   const [open, setOpen] = React.useState(false);
@@ -65,9 +65,10 @@ export const ElevatedHeaderCardDemo = React.memo(function ElevatedHeaderCard() {
   const cardHeaderStyles = useContainedCardHeaderStyles();
   const cardShadowStyles = useSoftRiseShadowStyles({ inactive: true });
   const cardHeaderShadowStyles = useFadedShadowStyles();
+  const [item, setItem] = React.useState([]);
 
   useEffect(() => {
-    Axios.get('http://localhost:5000/object/getAllObjects').then(res => {
+    Axios.get(`http://localhost:5000/match/${localStorage.getItem('userId')}`).then(res => {
       setCategorys(res.data)
     })
   },[])

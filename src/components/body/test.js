@@ -64,20 +64,22 @@ export default function Test({ categoryId }) {
   useEffect(() => {
     Axios.get(`http://localhost:5000/Category/${categoryId}`).then((res) => {
       const tempArray = [];
+      // let ele = res.data.formId.formData;
+
       res.data.formId.formData.map((ele) => {
-        if (ele.type === "Text") {
-          tempArray.push({
-            type: getType(ele.type, ele.placeholder, ele.options, ele.title),
-          });
-        } else if (ele.type === "SELECT") {
-          tempArray.push({
-            type: getType(ele.type, ele.placeholder, ele.options, ele.title),
-          });
-        } else if (ele.type === "Color") {
-          tempArray.push({
-            type: getType(ele.type, ele.placeholder, ele.options, ele.title),
-          });
-        }
+      if (ele.type === "Text") {
+        tempArray.push({
+          type: getType(ele.type, ele.placeholder, ele.options, ele.title),
+        });
+      } else if (ele.type === "SELECT") {
+        tempArray.push({
+          type: getType(ele.type, ele.placeholder, ele.options, ele.title),
+        });
+      } else if (ele.type === "Color") {
+        tempArray.push({
+          type: getType(ele.type, ele.placeholder, ele.options, ele.title),
+        });
+      }
       });
       setForm(tempArray);
       console.log(tempArray);
